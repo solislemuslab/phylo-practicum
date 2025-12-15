@@ -21,29 +21,44 @@ By the end of the course, you will be able to
 1. Reproduce all the steps of a phylogenomics data analysis of a published paper
 2. Learn best computing and reproducibility practices for phylogenomic data analyses
 
+## Publication to reproduce
 
+We will reproduce the phylogenetic analyses of [Pervasive hybridizations in the history of wheat relatives](https://www.science.org/doi/10.1126/sciadv.aav9188) by Glemin et al (2019).
+
+## Software
+
+- RAxML
+- bppSuite
+- SSIMUL
+- SuperTriplets
+- ASTRAL
+- Julia
+  - SNaQ
+  - PhyloPlots
+- HyDe
+- MSCQuartets
+- R
+  - ape, phangorn, ggtree 
 
 ## Schedule 2026
 
-[Tentative.] Schedule will be updated after specific paper is selected.
-
 | Session | Topic | Pre-class work | Lecture notes | Homework | 
 | :---:   | :---: | :---:         | :---: | :---: | 
-| 01/23 | Introduction
-| 01/30 | Paper discussion
-| 02/06 | Reproducibility and best computing practices
-| 02/13 | Data and quality control
-| 02/20 | Goal of the analyses and required software
-| 02/27 | Alignment
-| 03/06 | Orthology detection
-| 03/13 | Gene tree estimation
-| 03/20 | Species tree estimation
-| 03/27 | Dating
+| 01/23 | Introduction and reproducibility practices | 
+| 01/30 | Paper discussion | Read [Glemin et al, 2019](https://www.science.org/doi/10.1126/sciadv.aav9188); Optional reading [Marcussen et al, 2014](https://www.science.org/doi/full/10.1126/science.1250092)
+| 02/06 | Goal of the analyses, required software and data | | | Make sure all software is properly installed in your computer |
+| 02/13 | Gene tree inference
+| 02/20 | Species tree: supermatrix (full concatenation)
+| 02/27 | Species tree: supermatrix (10Mb sliding window)
+| 03/06 | Species tree: supertree
+| 03/13 | Species tree: coalescent-based (new analysis)
+| 03/20 | Species tree results (Figure 1)
+| 03/27 | Species network inference (new analysis)
 | 04/03 | Spring break
-| 04/10 | Species network estimation
-| 04/17 | Visualization of results
-| 04/24 | Open question: other analyses
-| 05/01 | Presentation of results
+| 04/10 | Hybrid tests: HyDe
+| 04/17 | Hybrid tests: MSCQuartets (new analysis)
+| 04/24 | Species network (Figure 5) and hybridization results (Figures 3-4)
+| 05/01 | Open question: other analyses
 | 05/04 | Final reproducible script due
 
 
