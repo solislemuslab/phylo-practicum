@@ -182,6 +182,7 @@ Make sure that:
 - you have git installed
 - you created your local folder (with the right structure) and linked it to GitHub (check with `git remote -v`)
 - you have a text editor to use (e.g. I use Visual Studio Code)
+- copy the `.gitignore` file from [the class repository](https://github.com/solislemuslab/phylo-practicum) in your local folder (this file specifies the types of files that git will ignore; e.g. we do not want to push any data to GitHub)
 
 
 # Learn more about reproducible practices!

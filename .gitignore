@@ -1,3 +1,10 @@
+# data files (wheat)
+*.nex
+*.tree
+MappedOnHordeumChromosomes_OneCopyGenes.txt
+
+
+
 # Compiled source #
 ###################
 *.com
