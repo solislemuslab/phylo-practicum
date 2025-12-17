@@ -11,17 +11,14 @@ We will reproduce the phylogenetic analyses of [Pervasive hybridizations in the 
 ## Software
 
 - RAxML
-- bppSuite
-- SSIMUL
 - SuperTriplets
 - ASTRAL
 - Julia
   - SNaQ
   - PhyloPlots
 - HyDe
-- MSCQuartets
 - R
-  - ape, phangorn, ggtree 
+  - ape, phangorn, ggtree, MSCQuartets
 
 ## Schedule 2026
 
