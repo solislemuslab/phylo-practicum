@@ -6,7 +6,7 @@ nav_order: 1
 
 # Welcome to PP 875: Phylogenetics Practicum
 
-This semester (Spring 2026), we will read and reproduce the phylogenetic analyses in [Glemin et al (2019)](https://www.science.org/doi/10.1126/sciadv.aav9188) "Pervasive hybridizations in the history of wheat relatives"
+This semester (Spring 2026), we will read and reproduce the phylogenetic analyses in [Glemin et al (2019)](https://www.science.org/doi/10.1126/sciadv.aav9188) "Pervasive hybridizations in the history of wheat relatives".
 
 # Reproducibility crash course
 

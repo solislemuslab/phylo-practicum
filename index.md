@@ -44,7 +44,7 @@ We will reproduce the phylogenetic analyses of [Pervasive hybridizations in the 
 
 | Session | Topic | Pre-class work | Lecture notes | Homework | 
 | :---:   | :---: | :---:         | :---: | :---: | 
-| 01/23 | Introduction and reproducibility practices | 
+| 01/23 | Introduction and reproducibility practices | | [notes](https://github.com/solislemuslab/phylo-practicum/blob/main/notes/1-intro-reproducibility.md) | Set-up local folder for the class ([HW](https://github.com/solislemuslab/phylo-practicum/blob/main/notes/1-intro-reproducibility.md#homework)) |
 | 01/30 | Paper discussion | Read [Glemin et al, 2019](https://www.science.org/doi/10.1126/sciadv.aav9188); Optional reading [Marcussen et al, 2014](https://www.science.org/doi/full/10.1126/science.1250092)
 | 02/06 | Goal of the analyses, required software and data | | | Make sure all software is properly installed in your computer |
 | 02/13 | Gene tree inference
