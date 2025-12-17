@@ -4,24 +4,7 @@ title: About
 nav_order: 1
 ---
 
-# PlantPath 875: Phylogenetic Practicum (UW-Madison)
-
-A course in the practice of phylogenetic inference from DNA sequence data. Students will practice all the steps of state-of-the-art phylogenomic analyses with hands-on weekly activities.
-
-- Spring 2026: Fridays 10:00-10:50am
-- Instructors: 
-    - Claudia Solis-Lemus, PhD 
-    - Josh Justison, PhD
-- Office hours: By appointment
-
-
-## Learning outcomes
-
-By the end of the course, you will be able to
-1. Reproduce all the steps of a phylogenomics data analysis of a published paper
-2. Learn best computing and reproducibility practices for phylogenomic data analyses
-
-## Publication to reproduce
+# Spring 2026
 
 We will reproduce the phylogenetic analyses of [Pervasive hybridizations in the history of wheat relatives](https://www.science.org/doi/10.1126/sciadv.aav9188) by Glemin et al (2019).
 
