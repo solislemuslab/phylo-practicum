@@ -6,6 +6,7 @@ A 1-credit course in the practice of phylogenetic inference from DNA sequence da
 - Instructors: 
     - Claudia Solis-Lemus, PhD 
     - Josh Justison, PhD
+    - Nathan Kolbow
 - Office hours: By appointment
 
 
