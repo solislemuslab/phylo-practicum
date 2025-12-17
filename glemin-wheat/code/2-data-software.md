@@ -187,7 +187,36 @@ add PhyloPlots
 ```
 Leave Julia by typing `exit()`.
 
-- HyDe
-- MSCQuartets
-- R
-  - ape, phangorn, ggtree 
+## 7. HyDe
+
+We will follow the installation commands from the [github repo](https://github.com/pblischak/HyDe).
+
+### For Mac
+
+I need to update Python:
+```
+brew install python@3.11
+```
+
+I will move to my `software` folder in my computer:
+```
+git clone https://github.com/pblischak/HyDe.git
+cd HyDe
+python3.11 -m pip install -r requirements.txt
+python3.11 -m pip install .
+```
+
+Note that I had updated XCode, but did not agree to the new license, so I was getting weird errors because of that.
+
+## 8. R
+
+Those that don't have them should install R and RStudio, see [here](https://posit.co/download/rstudio-desktop/).
+
+Inside R:
+```
+install.packages("ape")
+install.packages("phangorn")
+install.packages("BiocManager")
+BiocManager::install("YuLab-SMU/treedataverse")
+install.packages("MSCquartets")
+```
