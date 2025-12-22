@@ -143,17 +143,20 @@ From the paper, it seems they only use `bppSuite` for re-rooting the gene trees:
 
 So, we will skip this software for now.
 
-## 3. SSIMUL (skipped)
+## 3. SSIMUL
 
 We download the binaries from the software website for Mac and Linux [here](http://www.atgc-montpellier.fr/ssimul/).
 
-Since this software is only good for Mac/Linux, and it is also only used to go from MUL trees into single label trees, we will skip it:
-"We thus used SSIMUL (44) to process the multilabel of trees of Fm and F95m by turning—without losing phylogenetic signal when possible—its multilabeled trees into single-labeled trees. This was done by removing a copy of each pair of isomorphic sibling subtrees (44)."
+The zipped folder `ssimul.zip` contains the executables.
+
+**Note for Windows users:** We will use again the Windows Subsystem for Linux.
 
 
 ## 4. SuperTriplets
 
-SuperTriplets comes packaged as a Java program and thus requires Java. You can check if you have Java installed on your machine with the command `java -h`. If Java is not installed, you can download it [here](https://www.java.com/en/). **Note for Windows users**: unless you explicitly download Java in the WSL, you will only be able to use Java programs outside your WSL (i.e., in the normal command prompt before typing `wsl`).
+SuperTriplets comes packaged as a Java program and thus requires Java. You can check if you have Java installed on your machine with the command `java -h`. If Java is not installed, you can download it [here](https://www.java.com/en/). 
+
+**Note for Windows users**: unless you explicitly download Java in the WSL, you will only be able to use Java programs outside your WSL (i.e., in the normal command prompt before typing `wsl`).
 
 There is download information in the SuperTriplets [website](https://www.agap-ge2pop.org/supertriplets/download/).
 
@@ -182,7 +185,7 @@ $ which wastral
 
 And you can test it works by:
 ```
-$ ~/.julia/conda/3/bin/wastral
+$ wastral
 ```
 
 
@@ -244,12 +247,14 @@ python3.11 -m pip install .
 ```
 
 **Note for Mac users** that I had updated XCode, but did not agree to the new license, so I was getting weird errors because of that.
+
 **Note for Windows users:** You will need 
 a the Microsoft Visual C++ compiler that is at least version 14.0; that can be downloaded [here]( https://visualstudio.microsoft.com/visual-cpp-build-tools/
 ). When going thru the installer, select "Desktop Development with C++". Alternatively, if you downloaded Python for the WSL and want HyDe on the WSL, you can follow the download instructions using any C++ compiler.
 
 
-You can confirm installation by running `make test`
+You can confirm installation by running `make test`.
+
 ## 8. R
 
 Those that don't have them should install R and RStudio, see [here](https://posit.co/download/rstudio-desktop/).
