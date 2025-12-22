@@ -8,10 +8,14 @@ The zipped folder `IndividualAlignements_OneCopyGenes.zip` contains a folder `On
 
 ## Running RAxML on all the genes
 
-RAxML saves output files on the path you are, so we will run it from a `results` folder.
+RAxML saves output files on the path you are, so we will run it from a `results` folder. We will not run bootstrap because this was used on previous steps for data filtering.
 
-Also, we will run the analyses for all genes with a bash script that loops over genes in `OneCopy`.
+Also, we will run the analyses for all genes with a bash script that loops over genes in `OneCopy`. So, we move into the `code` folder and there is the `raxml.sh` bash script to run:
 
 ```
-raxml-ng --msa Ae_bicornis_Tr406_BIS2_Contig161_simExt_macseNT_noFS_clean.aln --model GTR+G
+cd code
+raxml.sh
 ```
+
+This command will take 3-24 hours to run, so we will leave this running and check results next class.
+
