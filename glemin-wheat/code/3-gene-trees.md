@@ -17,5 +17,5 @@ cd code
 raxml.sh
 ```
 
-This command will take 3-24 hours to run, so we will leave this running and check results next class.
+This command will take 3-24 hours to run, so we will leave this running. We can go over the output files.
 
