@@ -19,6 +19,16 @@ The authors uploaded the alignments, rather than raw data for us to assemble and
 
 # Installing required software
 
+## Software Note on Windows
+
+For Windows users, some software is only available on Linux/Mac or has different installation instructions for Windows users. Fortunately Windows 11 (and more recent versions of Windows 10) can create a Linux-like environment relatively easily using the [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/about). Detailed installation instructions can be found [here](https://learn.microsoft.com/en-us/windows/wsl/install) or from the command line you can run:
+```
+wsl --install
+```
+
+Now, from the command prompt you can enter `wsl` and you should enter a Linux environment where you can effectively install and use software that requires a Linux operating system. From here you _should_ be able to use any software that only has a Linux/Mac installation instructions. It is important to note that like with any operating system, the programs need to be accessible from the command line. An easy way to do this is to ensure your software is located somewhere in your `PATH`. You can check the folders that are a part of your path with `echo $PATH`.
+
+
 ## 1. RAxML Next Generation
 
 The repository for RAxML has installation instructions [here](https://github.com/amkozlov/raxml-ng).
@@ -39,6 +49,12 @@ When you try to run `raxml-ng`, your computer will complain that it cannot verif
 Note that if you copied your executable on your PATH, you will need to choose "open anyway" twice: once for the file in the original path and once for when you call it somewhere else in your machine.
 
 Confirm that you can run RAxML by typing `raxml-ng` in the terminal.
+
+
+### For Windows 
+
+This will need to be built in the Windows Subsystem for Linux. First, download the Linux binary for (RAxML-ng)[https://github.com/amkozlov/raxml-ng/releases/download/1.2.2/raxml-ng_v1.2.2_linux_x86_64.zip]. Extract the contents from this folder and you will find an executable file named `raxml-ng`, either add the location of raxml-ng to your `PATH` or move the file to a location already in your `PATH`. Now from the WSL, you can confirm you have installed RAxML with the command `raxml-ng -h`.
+
 
 ## 2. bppSuite (skipped)
 
@@ -137,6 +153,8 @@ Since this software is only good for Mac/Linux, and it is also only used to go f
 
 ## 4. SuperTriplets
 
+SuperTriplets comes packaged as a Java program and thus requires Java. You can check if you have Java installed on your machine with the command `java -h`. If Java is not installed, you can download it [here](https://www.java.com/en/). **Note for Windows users**: unless you explicitly download Java in the WSL, you will only be able to use Java programs outside your WSL (i.e., in the normal command prompt before typing `wsl`).
+
 There is download information in the SuperTriplets [website](https://www.agap-ge2pop.org/supertriplets/download/).
 
 You simply download the java file `SuperTriplets_v1.1.jar`. I put it in my computer `software` folder inside a subfolder named `supertriplets`. We will have to use the whole path when calling this function:
@@ -146,7 +164,12 @@ java -jar -Xmx500m ~/software/supertriplets/SuperTriplets_v1.1.jar newick_file.n
 
 ## 5. ASTRAL
 
-The [ASTRAL repo](https://github.com/smirarab/ASTRAL) recommends us to use the new C code [ASTER](https://github.com/chaoszhang/ASTER). Installation instructions are within. For me, installing with conda worked:
+The [ASTRAL repo](https://github.com/smirarab/ASTRAL) recommends us to use the new C code [ASTER](https://github.com/chaoszhang/ASTER). Installation instructions are within.
+
+
+### For Mac
+
+For me, installing with conda worked:
 ```
 conda install aster
 ```
@@ -162,9 +185,16 @@ And you can test it works by:
 $ ~/.julia/conda/3/bin/wastral
 ```
 
+
+### For Windows 
+
+You can download the binary from [here](https://github.com/chaoszhang/ASTER/archive/refs/heads/Windows.zip). All of the various forms of ASTRAL are included in the `exe/` folder and you should make sure these files are a part of your `PATH`. You can confirm correct installation by running `waster -h`.
+
+Alternatively, if you need to install from source, you can build in WSL and installation instructions can be found [here](https://github.com/chaoszhang/ASTER?tab=readme-ov-file#for-linuxmacoswsl-users).
+
 ## 6. Julia and packages
 
-I recommend installing Julia via [JuliaUp](https://github.com/JuliaLang/juliaup) as this allows you to have multiple Julia versions installed.
+I recommend installing Julia via [JuliaUp](https://github.com/JuliaLang/juliaup) as this allows you to have multiple Julia versions installed. 
 
 ### For Mac
 
@@ -177,6 +207,13 @@ Install Julia:
 ```
 juliaup add release
 ```
+
+### For Windows
+
+Julia can be installed by following the directions [here](https://julialang.org/downloads/) or directly from the Julia website [Windows app store](https://apps.microsoft.com/detail/9njnww8pvkmn?hl=en-US&gl=US).
+
+### Once Julia is Installed
+
 
 Start Julia by typing `julia` in the terminal.
 Inside Julia, install packages by first pressing `]` to go into package mode (the prompt will change to `(@v1.12) pkg>`):
@@ -191,23 +228,28 @@ Leave Julia by typing `exit()`.
 
 We will follow the installation commands from the [github repo](https://github.com/pblischak/HyDe).
 
-### For Mac
+HyDe requires Python. You can install the latest version of Python for your machine [here](https://www.python.org/downloads/). You can check installation by running the command `python -h` or `pythonX.XX -h` where X.XX is the version number of python.
 
-I need to update Python:
-```
-brew install python@3.11
-```
 
-I will move to my `software` folder in my computer:
+The files can be downloaded with:
 ```
 git clone https://github.com/pblischak/HyDe.git
+```
+
+Next move into the HyDe folder and install HyDe:
+```
 cd HyDe
 python3.11 -m pip install -r requirements.txt
 python3.11 -m pip install .
 ```
 
-Note that I had updated XCode, but did not agree to the new license, so I was getting weird errors because of that.
+**Note for Mac users** that I had updated XCode, but did not agree to the new license, so I was getting weird errors because of that.
+**Note for Windows users:** You will need 
+a the Microsoft Visual C++ compiler that is at least version 14.0; that can be downloaded [here]( https://visualstudio.microsoft.com/visual-cpp-build-tools/
+). When going thru the installer, select "Desktop Development with C++". Alternatively, if you downloaded Python for the WSL and want HyDe on the WSL, you can follow the download instructions using any C++ compiler.
 
+
+You can confirm installation by running `make test`
 ## 8. R
 
 Those that don't have them should install R and RStudio, see [here](https://posit.co/download/rstudio-desktop/).
