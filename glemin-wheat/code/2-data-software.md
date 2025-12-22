@@ -266,4 +266,5 @@ install.packages("phangorn")
 install.packages("BiocManager")
 BiocManager::install("YuLab-SMU/treedataverse")
 install.packages("MSCquartets")
+install.packages("phytools")
 ```

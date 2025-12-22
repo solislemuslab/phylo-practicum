@@ -27,7 +27,7 @@ We will reproduce the phylogenetic analyses of [Pervasive hybridizations in the 
 | 01/23 | Introduction and reproducibility practices | | [notes](https://github.com/solislemuslab/phylo-practicum/blob/main/notes/1-intro-reproducibility.md) | Set-up local folder for the class ([HW](https://github.com/solislemuslab/phylo-practicum/blob/main/notes/1-intro-reproducibility.md#homework)) |
 | 01/30 | Paper discussion | Read [Glemin et al, 2019](https://www.science.org/doi/10.1126/sciadv.aav9188); Optional reading [Marcussen et al, 2014](https://www.science.org/doi/full/10.1126/science.1250092)
 | 02/06 | Goal of the analyses, required software and data | | [notes](https://github.com/solislemuslab/phylo-practicum/blob/main/glemin-wheat/code/2-data-software.md) | Make sure all software is properly installed in your computer |
-| 02/13 | Gene tree inference
+| 02/13 | Gene tree inference | | [notes](https://github.com/solislemuslab/phylo-practicum/blob/main/glemin-wheat/code/2-gene-trees.md) | Run RAxML on all genes |
 | 02/20 | Species tree: supermatrix (full concatenation)
 | 02/27 | Species tree: supermatrix (10Mb sliding window)
 | 03/06 | Species tree: supertree
