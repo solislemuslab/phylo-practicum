@@ -13,6 +13,16 @@ Note that RAxML will save output files in the folder where the data is, so we wi
 ```
 raxml-ng --msa triticeae_allindividuals_OneCopyGenes.fasta --model GTR+G4
 ```
+Note that this will take ~24 hours to run.
+
+We now move the output files to the `results` folder:
+```
+cd ../../results/RAxML/
+mkdir full-concatenation
+cd ../../data/Wheat_Relative_History_Data_Glemin_et_al
+ls ## to check files are there
+mv *.raxml* ../../results/RAxML/full-concatenation
+```
 
 ### Creating our own concatenated file
 
