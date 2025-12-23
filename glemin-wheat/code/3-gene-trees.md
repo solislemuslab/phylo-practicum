@@ -139,5 +139,7 @@ cd code
 raxml.sh
 ```
 
-This command will take 3-24 hours to run. We can use similar R commands to visualize the results.
+This command will take around 9 hours to run. 
+
+We can use similar R commands to visualize the results.
 
