@@ -66,7 +66,7 @@ Among the 298 10-Mb trees, only 248 contained all individuals."
 
 We want to build one species tree per file, so we will use a similar bash script to the one for gene trees (`raxml-concatenation.sh`).
 
-Within th `code` folder:
+Within the `code` folder:
 ```
 ./raxml-concatenation.sh
 ```
