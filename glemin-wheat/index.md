@@ -1,7 +1,8 @@
 ---
 layout: default
-title: About
-nav_order: 1
+title: Glemin (Wheat)
+nav_order: 3
+has_toc: false
 ---
 
 # Spring 2026

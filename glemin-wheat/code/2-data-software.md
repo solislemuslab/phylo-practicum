@@ -1,7 +1,8 @@
 ---
 layout: default
-title: Setting up data/software
-nav_order: 2
+title: Data and Softwate Setup
+parent: Glemin (Wheat)
+nav_order: 1
 ---
 
 # Downloading the data

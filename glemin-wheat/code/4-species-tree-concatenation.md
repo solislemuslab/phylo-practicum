@@ -1,10 +1,17 @@
-# Species tree via concatenation
+---
+layout: default
+title: Species tree estimation
+parent: Glemin (Wheat)
+nav_order: 3
+---
+
+# 1. Species tree via concatenation
 
 There will be two types of concatenation:
 - full concatenation
 - 10Mb windows
 
-## Full concatenation
+## 1.1 Full concatenation
 
 The authors already provide the fully concatenated fasta file in `FullConcatenation_OneCopyGenes.zip` and when you unzip, you get `triticeae_allindividuals_OneCopyGenes.fasta`. We will run RAxML on this file following the details in the paper: "We inferred the phylogeny from this supermatrix with RAxML v8 using the GTR+Γ4 model and the fast-bootstrap option".
 
@@ -48,7 +55,7 @@ rtre = root(tre,outgroup="H_vulgare_HVens23", resolve.root=TRUE)
 plot(rtre)
 ```
 
-## 10Mb sliding window concatenation
+## 1.2 10Mb sliding window concatenation
 
 Rather than building one species tree for the fully concatenated sequences, we could create smaller concatenated files (10Mb windows) to assess tree discordance.
 The authors provide already the 10Mb sliding window concatenated sequence files in the `Concatenation10Mb_OneCopyGenes.zip` file which unzips into the `Concatenation10Mb_OneCopyGenes` folder:
@@ -95,3 +102,5 @@ densityTree(trees,use.edge.length=FALSE,type="cladogram",nodes="centered")
 ```
 
 [do we want to create the 10Mb windows ourselves?]
+
+# 2. Species tree via coalescent models
