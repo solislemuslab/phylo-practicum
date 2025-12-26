@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Glemin (Wheat)
+title: Glemin Wheat
 nav_order: 3
 has_toc: false
 ---

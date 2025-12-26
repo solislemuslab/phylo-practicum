@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Data and Softwate Setup
-parent: Glemin (Wheat)
+parent: Glemin Wheat
 nav_order: 1
 ---
 
