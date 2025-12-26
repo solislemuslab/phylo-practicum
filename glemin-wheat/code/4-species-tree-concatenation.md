@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Species tree estimation
-parent: Glemin Wheat
+parent: S26 Wheat
 nav_order: 3
 ---
 
