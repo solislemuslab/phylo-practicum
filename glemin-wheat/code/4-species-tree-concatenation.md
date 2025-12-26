@@ -64,12 +64,14 @@ In the paper, the authors say:
 [...]
 Among the 298 10-Mb trees, only 248 contained all individuals."
 
-We want to build one species tree per file, so we will use a similar bash script to the one for gene trees (`raxml-concatenation.sh`).
+We want to build one species tree per file, so we will use a similar bash script to the one for gene trees (`raxml-concatenation.sh`). This script has the flag `--threads 5` to use 5 threads within each raxml job.
 
 Within the `code` folder:
 ```
 ./raxml-concatenation.sh
 ```
+
+There are 248 genes, each gene tree estimation took around 140 seconds in my computer (so total would be ~10 hours).
 
 ### Visualization
 
@@ -78,6 +80,10 @@ We want to reproduce Figure 1(B) with a densitree with all species trees from 10
 We need to be in the `results/RAxML/10Mb-concatenation` folder:
 
 ```r
+library(ape)
+library(phangorn)
+library(phytools)
+
 files <- list.files(
   pattern = "\\.bestTree$",
   full.names = TRUE
