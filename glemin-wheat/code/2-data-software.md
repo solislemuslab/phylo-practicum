@@ -4,11 +4,42 @@ title: Setting up data/software
 nav_order: 2
 ---
 
+# Cloning the class repository
+
+Most class materials are accessible from the [course repository](https://github.com/solislemuslab/phylo-practicum/tree/main). If you have [Git](https://git-scm.com/) downloaded, you can clone this repo with the command `git https://github.com/solislemuslab/phylo-practicum/tree/main`. 
+
+Specifically, there is a folder called `glemin-wheat` that we will be using for this course. This folder contains all scripts nessecary to recreate the analyses of [Glemin et al (2019)](https://www.science.org/doi/10.1126/sciadv.aav9188). These scripts assume the specific directory structure that is already set up in this repo. While we encourage students to use this structure, you can organize your files however makes the most sense for you, but be noted that some scripts may need to be altered accordingly. The structure we use is:
+```
+glemin-wheat/
+├── README.md                  <-- Contains an Overview of the contents
+├── data/
+│   ├── Wheat_Relative_History_Data_Glemin_et_al/   Folder that will contain the wheat data.
+│   │	├── README.txt     <-- Describes the downloadable data from the paper
+├── code/                  <-- Scripts and bash files to run the analyses.
+│	|	├── Y-XXXXX.md     <-- Markdown for class number Y on how to run XXXXX analyses
+|   |	├── Y-ZZZZZ.sh     <-- Bash script for class number Y to run analysis ZZZZZ
+├── results/               <-- This folder will contain the results generated for each analysis
+
+```
+
 # Downloading the data
 
 The authors of the paper made data publicly available in a clean manner in this [data repository](https://www.agap-ge2pop.org/wheat-relative-history/).
 
 We will download the [Wheat_Relative_History_Data_Glemin_et_al.zip](https://www.agap-ge2pop.org/wp-content/uploads/WheatRelativeHistory/download/Wheat_Relative_History_Data_Glemin_et_al.zip) and move it into our `data` subfolder.
+
+We will need to extract the folder itself from the zipped file. After unzipping, the folder will contain more data folders that are zipped. You will additionally need to extract the contents of `IndividualAlignements_OneCopyGenes.zip` file. At the end your directory structure should look like this:
+
+```
+glemin-wheat/
+
+├── data/
+│   ├── Wheat_Relative_History_Data_Glemin_et_al/
+│	|	├── OneCopyGenes
+│	│   │	├── T_urartu_Tr309_URA15_Singlet902_simExt_macseNT_noFS_clean.aln
+│	│   │	├── T_urartu_Tr309_URA15_Singlet9090_simExt_macseNT_noFS_clean.aln
+│	│   │	├── ...
+```
 
 The authors uploaded the alignments, rather than raw data for us to assemble and align. 
 
@@ -53,7 +84,7 @@ Confirm that you can run RAxML by typing `raxml-ng` in the terminal.
 
 ### For Windows 
 
-This will need to be built in the Windows Subsystem for Linux. First, download the Linux binary for (RAxML-ng)[https://github.com/amkozlov/raxml-ng/releases/download/1.2.2/raxml-ng_v1.2.2_linux_x86_64.zip]. Extract the contents from this folder and you will find an executable file named `raxml-ng`, either add the location of raxml-ng to your `PATH` or move the file to a location already in your `PATH`. Now from the WSL, you can confirm you have installed RAxML with the command `raxml-ng -h`.
+This will need to be built in the Windows Subsystem for Linux. First, download the Linux binary for [RAxML-ng](https://github.com/amkozlov/raxml-ng/releases/download/1.2.2/raxml-ng_v1.2.2_linux_x86_64.zip). Extract the contents from this folder and you will find an executable file named `raxml-ng`, either add the location of raxml-ng to your `PATH` or move the file to a location already in your `PATH`. Now from the WSL, you can confirm you have installed RAxML with the command `raxml-ng -h`.
 
 
 ## 2. bppSuite (skipped)

@@ -5,11 +5,22 @@ They used SSIMUL to go from multilabeled trees in F_m (F_m^95) to single labeled
 Finally, they kept the 8739 gene trees containing at most one sequence per individual (each individual has only one sequence (copy)). This is the data we have.
 The zipped folder `IndividualAlignements_OneCopyGenes.zip` contains a folder `OneCopyGenes` with 8739 aligned genes.
 
+## Using RAxML 
+
+The `raxml-ng` command is used to run RAxML and estimate a gene tree from an alignment. `raxml-ng` has many different configurations, models, and parameter settings that can be specified by adding additional arguments to the command. You can use `raxml-ng -h` to see all of the arguments. We will be use RAxML using the default settings and a GTR model with a four category gamma distribution for site variation. For a single gene the command would look like this:
+```
+raxml-ng --msa T_urartu_Tr309_URA15_Singlet902_simExt_macseNT_noFS_clean.aln --model GTR+G4
+```
+
+The `--msa` flag specifies the alignment file that will be used to construct the phylogeny while the `--model` flag specifies the model of sequence evolution. The authors conduct a bootstrap analysis for each gene tree; this can be done with the `--bs-trees` flag. However, to save on computation time, we will not conduct bootstrap analyses.  
+
+
 ## Running RAxML on 10 genes
 
-We will create a data folder with only 10 genes that we can run in class, and the full set will be run as HW.
 
-We are in the `data/Wheat_Relative_History_Data_Glemin_et_al` folder. We create a subfolder and copy the first 10 genes in this folder.
+Since running RAxML on each gene will take some time, we will create a data folder with only 10 genes that we can run in class. The full set will then be run as HW.
+
+We are in the `data/Wheat_Relative_History_Data_Glemin_et_al` folder. We create a subfolder called `OneCopyGene-trimmed` and copy the first 10 genes in this folder.
 ```
 mkdir OneCopyGenes-trimmed
 cd OneCopyGenes
@@ -18,7 +29,9 @@ ls | head -n10 | xargs -I {} cp "{}" ../OneCopyGenes-trimmed
 
 The subfolder `OneCopyGenes-trimmed` now contains the first 10 alignments from `OneCopyGenes`.
 
-We could run RAxML on the terminal directly with the `raxml-ng` executable but we will run it through a bash script so that we can loop over genes and we can move output files to a `results` folder. Note that we will not run bootstrap because this was used on previous steps for data filtering.
+We could run RAxML on the terminal directly with the `raxml-ng` executable but instead we will run it through a bash script so that we can loop over genes and we can move output files to a `results` folder. To automate this process we wrote the bash script called `raxml.sh`. We have commented this script that explains some of the basic commands but if you're interested in using bash to automate some processes, we recommend checking out [Learn X in Y minutes (where X=Bash)](https://learnxinyminutes.com/bash/).
+
+Note that we will not run bootstrap because this was used on previous steps for data filtering.
 
 Now we move to the `code` folder to run the `raxml.sh` script.
 
