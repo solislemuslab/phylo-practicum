@@ -1,3 +1,10 @@
+---
+layout: default
+title: Gene tree estimation
+parent: S26 Wheat
+nav_order: 2
+---
+
 # Gene Trees
 
 The data started with 13,288 genes which were filtered to 12,959 by discarding trees where the outgroups were not monophyletic (this set was denoted F_i). They renamed each sequence as the species to go from F_i to F_m (F_m^95 only has clades with bootstrap greater than 95).

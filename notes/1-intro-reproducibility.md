@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Reproducibility
-nav_order: 1
+nav_order: 2
+has_toc: false
 ---
 
 # Reproducibility crash course
