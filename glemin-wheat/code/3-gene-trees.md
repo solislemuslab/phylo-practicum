@@ -38,7 +38,7 @@ The subfolder `OneCopyGenes-trimmed` now contains the first 10 alignments from `
 
 We could run RAxML on the terminal directly with the `raxml-ng` executable but instead we will run it through a bash script so that we can loop over genes and we can move output files to a `results` folder. To automate this process we wrote the bash script called `raxml.sh`. We have commented this script that explains some of the basic commands but if you're interested in using bash to automate some processes, we recommend checking out [Learn X in Y minutes (where X=Bash)](https://learnxinyminutes.com/bash/).
 
-Note that we will not run bootstrap because this was used on previous steps for data filtering.
+Note that we will not run bootstrap because this was used on previous steps for data filtering and it save computation time.
 
 Now we move to the `code` folder to run the `raxml.sh` script.
 
@@ -58,33 +58,130 @@ Ae_bicornis_Tr406_BIS2_Contig10132_simExt_macseNT_noFS_clean.aln.raxml.bestTree
 Ae_bicornis_Tr406_BIS2_Contig10132_simExt_macseNT_noFS_clean.aln.raxml.bestModel
 ```
 
-### Visualizing the results
+You can find more details about the output files [here](https://github.com/amkozlov/raxml-ng/wiki/Output:-files-and-settings#output-prefix). 
 
-First, we will plot the gene tree for the first gene `Ae_bicornis_Tr406_BIS2_Contig10132_simExt_macseNT_noFS_clean.aln` in R. Note that I am in the `results/RAxML` folder:
+## Analyzing the results
+
+We will primarily be analyzing the inferred gene trees in R. We have provided the following R script `3-gene-tree-analysis.R` that contains the code we will run thru here.
+
+First we want to read in each gene tree; for this we will primarily be focusing on the output file with the suffix `raxml.bestTree` which contains the best found bifurcating phylogeny.
 
 ```r
 library(ape)
 library(phangorn)
-library(phytools)
 
-tre = read.tree(file="Ae_bicornis_Tr406_BIS2_Contig10132_simExt_macseNT_noFS_clean.aln.raxml.bestTree")
-plot(tre)
+getwd() #Check the working directory. we want to be in the results/RAxML folder
+#setwd("PathTo/results/RAxML") #replce PathTo with the correct path and run if not in the correct folder
+
+tree_files <-list.files(pattern="\\.raxml.bestTree$") #List all .bestTree files. $ ensures the end of the name
+
+gene_trees<- list() # list with all the trees
+class(gene_trees)<- "multiPhylo" #make it a multiphylo object for ease of use with other 
+
+i<-1
+for(tree_file in tree_files){ ##go thru each file and read the tree
+  gene_trees[[i]]<- read.tree(tree_file)
+  i<-i+1
+}
 ```
 
-Note that we need to root at the outgroup: `H_vulgare_HVens23`
+Now we have all of the gene trees in our object named `gene_trees`.
+
+We may want some basic checks for correctness of the dataset. In the paper, they filtered data by being able to root the gene tree from these species in order:  H_vulgare, Er_bonaepartis, S_vavilovii, and Ta_caputMedusae. We can confirm that each gene tree has at least one of these taxa and re-root in R with the following code:
 
 ```r
-rtre = root(tre,outgroup="H_vulgare_HVens23", resolve.root=TRUE)
-plot(rtre)
+#Find the appropriate root taxon
+root_taxa <- c("H_vulgare_HVens23", "Er_bonaepartis_TB1", "S_vavilovii_Tr279", "Ta_caputMedusae_TB2")
+
+# Extract the first matching species for each tree
+gene_tree_outgroup<- rep(NA,length(gene_trees))
+for(i in 1:length(gene_trees)){
+  gene_tree <- gene_trees[[i]]
+  found_taxa <- root_taxa[root_taxa %in% gene_tree$tip.label]
+  
+  # Return the first one if it exists
+  if (length(found_taxa) > 0) {
+    gene_tree_outgroup[i]<-found_taxa[1]
+  }
+}
+
+#check if any gene trees don't have an outgroup taxon
+any(is.na(gene_tree_outgroup)) ## should return FALSE
+
+#re-reroot all our gene trees by the respective outgroup
+for(i in 1:length(gene_trees)){
+  gene_trees[[i]]<- root(gene_trees[[i]],
+                         outgroup = gene_tree_outgroup[i],
+                         resolve.root=TRUE)
+}
 ```
 
-Checking all genes have the same outgroup:
-```
-$ grep "H_vulgare_HVens23" *.bestTree | wc -l
-      10
+### Visualizing the results
+
+
+We can plot the gene trees with the `plot()` command:
+
+```r
+#plot(gene_trees) to plot all gene trees sequentially
+plot(gene_trees[[2]]) # plots the second gene tree
 ```
 
-Now, we want to compare the ML trees for each of the 20 RAxML runs (in the `.mlTrees` file). We will do a densitree.
+It additionally is worth understanding what the data look like. One important thing is considering how we filtered our data and how this influences the methods we can use downstream. Currently our dataset consists of all genes that have at most one copy per individual. One important distinction is that some of these genes have missing taxa (i.e., not all taxa may be present on every gene). This poses certain challenges for summarizing and visualizing the overall signal for species relationships. One common practice is to limit the data to include only complete records (either keeping only genes that have all individuals or only keeping individuals that are present on all genes). However, supertree methods are capable of handling missing taxa. Nonethless we may want an idea of how often individuals are present across our set of genes:
+
+```r
+# see which genes have which taxa
+all_labels <- unlist(lapply(gene_trees, function(x) x$tip.label)) ##count how often each individual appears
+df <- as.data.frame(table(all_labels) / length(gene_trees)) #organize as a nice data frame for plotting
+
+ggplot(df, aes(x = all_labels, y = Freq)) +
+  geom_col() +
+  labs(x = "Individual", y = "Proportion")+
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+In our set of 10 genes it appears that most individuals seem well represented with the exception of the T_boeoticum individuals. If we were using methods that could not account for missing taxa, these results that indicate that we may want to drop T_boeoticum as a species or we may need to aggregate individuals at the species level. 
+
+However, for supertree methods we can use the dataset as is. We will explore supertree methods more later in the course but we can apply a simple maximum parsimony approach to create a supertree from all our genes to get a sense of the overall signal from the gene trees.
+
+```r
+st<-superTree(gene_trees)
+st<-root(st,"H_vulgare_HVens23",resolve.root = T)
+plot(st)
+```
+
+From here we can see that individuals within a given species  generally create a monophyletic group; this an indicator that we would probably be fine aggregating our data at the species level if we wanted to use methods that don't handle individual-level sampling or we wanted to aggregate our data to deal with the missing taxa across genes.
+
+We can additionally try to plot all of the genes as a densitree plot, a plot where all the gene tree topologies are overlaid over one another to give a high-level cloud of all the signal
+
+```r
+densiTree(gene_trees,consensus=st,scaleX=T,type='cladogram')
+```
+
+From this we can see a lot of conflict across genes. This could be an artifact of the difficulty of making these plots when there are missing taxa across genes or it could be a biological source of discord (e.g., ILS or gene flow). For this type of plot it might be good to either aggregate our samples at the species level or to restrict our taxa to only those that are found at all genes, we try the latter here.
+
+```r
+common_tips <- Reduce(
+  intersect,
+  lapply(gene_trees, function(tr) tr$tip.label)
+)
+
+length(common_tips) ## 6
+
+trees_pruned <- lapply(
+  gene_trees,
+  function(tr) drop.tip(tr, setdiff(tr$tip.label, common_tips))
+)
+
+densityTree(trees_pruned,use.edge.length=FALSE,type="cladogram",nodes="centered")
+```
+
+From here we can see that this approach loses a lot of information (taxa), and this is only when using 10 genes! Even fewer (if any) taxa will have complete records across all sampled genes. This highlights the difficulties of working with empirical datasets and how care is needed when filtering and subsetting your data while trying to maintain signal.
+
+
+For more information on density trees, you can see this [phytools blog](https://blog.phytools.org/2017/04/slanted-phylogram-cladogram-densitytree.html).
+
+
+Now, we want to compare the ML trees for each of the 20 RAxML runs (in the `.mlTrees` file). We will do a densitree. This can help us visualize the best tree across each run. We may want this type of a visualization had we performed bootstrap analysis, then we could get a sense of the uncertainty of our estimates across bootstrap replicates. 
 
 ```r
 trees = read.tree(file="Ae_bicornis_Tr406_BIS2_Contig10132_simExt_macseNT_noFS_clean.aln.raxml.mlTrees")
@@ -106,39 +203,6 @@ densityTree(rtrees,use.edge.length=FALSE,type="cladogram",nodes="centered")
 ```
 
 [note: the plot looks weird for the rooted trees, not sure why]
-
-
-Now, we want to do the densitree of all 10 best gene trees:
-
-```r
-files <- list.files(
-  pattern = "\\.bestTree$",
-  full.names = TRUE
-)
-
-genetrees <- lapply(files, read.tree)
-densityTree(genetrees,type="cladogram",nodes="intermediate")
-```
-
-Oh! We get an error because they have different number of tips. The easiest is to keep the subset of taxa that appears in all trees.
-
-```r
-common_tips <- Reduce(
-  intersect,
-  lapply(genetrees, function(tr) tr$tip.label)
-)
-
-length(common_tips) ## 6
-
-trees_pruned <- lapply(
-  genetrees,
-  function(tr) drop.tip(tr, setdiff(tr$tip.label, common_tips))
-)
-
-densityTree(trees_pruned,use.edge.length=FALSE,type="cladogram",nodes="centered")
-```
-
-For more information on density trees, you can see this [phytools blog](https://blog.phytools.org/2017/04/slanted-phylogram-cladogram-densitytree.html).
 
 
 ## Running RAxML on all the genes
