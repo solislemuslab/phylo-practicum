@@ -42,6 +42,7 @@ for(i in 1:length(gene_trees)){
   gene_trees[[i]]<- root(gene_trees[[i]],
                          outgroup = gene_tree_outgroup[i],
                          resolve.root=TRUE)
+  gene_trees[[i]]<-chronos(gene_trees[[i]]) ## make ultrametric for nicer densitree
 }
 
 
