@@ -227,3 +227,23 @@ This command will take around 9 hours to run.
 
 We can use similar R commands to visualize the results.
 
+```r
+library(ape)
+library(phangorn)
+
+getwd() #Check the working directory. we want to be in the results/RAxML folder
+
+tree_files <-list.files(pattern="\\.raxml.bestTree$") #List all .bestTree files. $ ensures the end of the name
+
+gene_trees<- list() # list with all the trees
+class(gene_trees)<- "multiPhylo" #make it a multiphylo object for ease of use with other 
+
+i<-1
+for(tree_file in tree_files){ ##go thru each file and read the tree
+  gene_trees[[i]]<- read.tree(tree_file)
+  i<-i+1
+}
+
+## We will write the gene trees to file for SuperTriplets later on:
+write.tree(gene_trees, file="all_gene_trees.tre")
+```

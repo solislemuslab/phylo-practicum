@@ -5,9 +5,9 @@ parent: S26 Wheat
 nav_order: 4
 ---
 
-# 1. Species tree via concatenation
+# Species tree via concatenation
 
-## 1.2 10Mb sliding window concatenation
+## 10Mb sliding window concatenation
 
 Rather than building one species tree for the fully concatenated sequences, we could create smaller concatenated files (10Mb windows) to assess tree discordance.
 The authors provide already the 10Mb sliding window concatenated sequence files in the `Concatenation10Mb_OneCopyGenes.zip` file which unzips into the `Concatenation10Mb_OneCopyGenes` folder:
@@ -57,3 +57,4 @@ densityTree(trees,type="cladogram",nodes="intermediate")
 densityTree(trees,use.edge.length=FALSE,type="cladogram",nodes="centered")
 ```
 
+We can compare the densitree with the one from the `Densitree_OneCopyGenes.nex`.
