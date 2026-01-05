@@ -36,14 +36,14 @@ ls | head -n10 | xargs -I {} cp "{}" ../OneCopyGenes-trimmed
 
 The subfolder `OneCopyGenes-trimmed` now contains the first 10 alignments from `OneCopyGenes`.
 
-We could run RAxML on the terminal directly with the `raxml-ng` executable but instead we will run it through a bash script so that we can loop over genes and we can move output files to a `results` folder. To automate this process we wrote the bash script called `raxml.sh`. We have commented this script that explains some of the basic commands but if you're interested in using bash to automate some processes, we recommend checking out [Learn X in Y minutes (where X=Bash)](https://learnxinyminutes.com/bash/).
+We could run RAxML on the terminal directly with the `raxml-ng` executable but instead we will run it through a bash script so that we can loop over genes and we can move output files to a `results` folder. To automate this process we wrote the bash script called `04-raxml.sh`. We have commented this script that explains some of the basic commands but if you're interested in using bash to automate some processes, we recommend checking out [Learn X in Y minutes (where X=Bash)](https://learnxinyminutes.com/bash/).
 
 Note that we will not run bootstrap because this was used on previous steps for data filtering and it save computation time.
 
-Now we move to the `code` folder to run the `raxml.sh` script.
+Now we move to the `code` folder to run the `04-raxml.sh` script.
 
 ```
-./raxml.sh
+./04-raxml.sh
 ```
 
 For each gene, we have 8 output files created inside `results/RAxML`:
@@ -207,7 +207,7 @@ densityTree(rtrees,use.edge.length=FALSE,type="cladogram",nodes="centered")
 
 ## Running RAxML on all the genes
 
-We need to modify the `raxml.sh` script so that it loops over all the genes, not just the 10 genes. In the script, we need to change the line:
+We need to modify the `04-raxml.sh` script so that it loops over all the genes, not just the 10 genes. In the script, we need to change the line:
 ```
 DATADIR="../data/Wheat_Relative_History_Data_Glemin_et_al/OneCopyGenes-trimmed"
 ```
@@ -216,11 +216,11 @@ for
 DATADIR="../data/Wheat_Relative_History_Data_Glemin_et_al/OneCopyGenes"
 ```
 
-Then, inside the `code` folder, we run the `raxml.sh` bash script:
+Then, inside the `code` folder, we run the `04-raxml.sh` bash script:
 
 ```
 cd code
-raxml.sh
+04-raxml.sh
 ```
 
 This command will take around 9 hours to run. 

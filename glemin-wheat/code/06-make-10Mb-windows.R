@@ -1,5 +1,4 @@
 library(ape)
-library(ips)
 
 getwd() #should be in the code folder
 #setwd() # if not in the correct folder
