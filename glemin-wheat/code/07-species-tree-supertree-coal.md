@@ -85,12 +85,12 @@ cleaned_individuals <- sub("_[^_]+$", "", all_individuals)
 
 #map all individuals to species
 mapping <- paste(all_individuals,cleaned_individuals)
-writeLines(mapping, "../data/Wheat_Relative_History_Data_Glemin_et_al/species_mapping.txt") ## write to file
+writeLines(mapping, "../data/Wheat_Relative_History_Data_Glemin_et_al/07-species_mapping.txt") ## write to file
 ```
 
-Now our mapping is saved as `species_mapping.txt`
+Now our mapping is saved as `07-species_mapping.txt`
 
 To make a species-level phylogeny, we just need to specify our mapping file in Weighted ASTRAL with the `-a` flag:
 ```
-wastral -i 04-all_gene_trees.tre -a species_mapping.txt -o 07-species-tree.tre
+wastral -i 04-all_gene_trees.tre -a 07-species_mapping.txt -o 07-species-tree.tre
 ```
