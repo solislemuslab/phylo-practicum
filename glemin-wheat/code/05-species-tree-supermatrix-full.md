@@ -20,9 +20,9 @@ Note that RAxML will save output files in the folder where the data is, so we wi
 ```
 raxml-ng --msa triticeae_allindividuals_OneCopyGenes.fasta --model GTR+G4
 ```
-Note that this will take ~24 hours to run.
 
-We now move the output files to the `results` folder:
+Note that this will take ~24 hours to run and after that, we move the output files to the `results` folder:
+
 ```
 cd ../../results/RAxML/
 mkdir full-concatenation
@@ -39,6 +39,8 @@ We could practice the process of concatenating all the sequence files in `OneCop
 
 ### Visualization
 
+We open R in the `results/RAxML/full-concatenation/` folder:
+
 ```r
 library(ape)
 library(phangorn)
@@ -46,13 +48,21 @@ library(phytools)
 
 tre = read.tree(file="triticeae_allindividuals_OneCopyGenes.fasta.raxml.bestTree")
 plot(tre)
+nodelabels()
 ```
 
-Note that we need to root at the outgroup: `H_vulgare_HVens23`
+Note that we need to root at the outgroup clade: `H_vulgare_HVens23`, `Ta_caputMedusae_TB2`, `Er_bonaepartis_TB1`, `S_vavoilovii_Tr279` which corresponds to node=51.
 
 ```r
-rtre = root(tre,outgroup="H_vulgare_HVens23", resolve.root=TRUE)
-plot(rtre)
+rtre = root(tre,node = 51, resolve.root=TRUE)
+plot(ladderize(rtre))
 ```
 
-We can compare to the one provided by the authors: `MLtree_OneCopyGenes.tree`.
+We can compare to the one provided by the authors: `MLtree_OneCopyGenes.tree`:
+
+```r
+tre2 = read.tree(file="../../../data/Wheat_Relative_History_Data_Glemin_et_al/MLtree_OneCopyGenes.tree")
+plot(tre2)
+rtre2 = root(tre2,node = 51, resolve.root=TRUE)
+plot(ladderize(rtre2))
+```
