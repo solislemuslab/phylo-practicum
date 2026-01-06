@@ -90,7 +90,7 @@ densiTree(trees,consensus=st,scaleX=T,type='cladogram', alpha=0.1)
 
 We can compare the densitree with the one provided by the authors: `Densitree_OneCopyGenes.nex`. We had issues reading this file into R, so we had to make some minor manual modifications (`Densitree_OneCopyGenes-modified.nex`):
 1. Added ; after "begin trees"
-2. Had to manually change taxon 0 as 47
+2. Had to manually change taxon 0 as 47 (in translate block and all the trees)
 
 ```r
 trees2 <- read.nexus("../../../data/Wheat_Relative_History_Data_Glemin_et_al/Densitree_OneCopyGenes-modified.nex")
