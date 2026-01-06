@@ -58,12 +58,12 @@ for(i in seq_along(gene_files)) {
 
 
 
-final_output <- "final_supermatrix.fasta"
+final_output <- "manual_supermatrix.fasta"
 if(file.exists(final_output)) file.remove(final_output)
 
 for(taxon in all_taxa) { #for all taxa
   # Read the sequence we built up
-  lines <- readLines(paste0(taxon, ".temp"),warn = F)
+  lines <- readLines(paste0(concat_10_dir,taxon, ".temp"),warn = F)
   # Merge all sequence lines (lines 2 to end) into one line
   header <- lines[1]
   seq_body <- paste(lines[-1], collapse = "")
@@ -71,7 +71,7 @@ for(taxon in all_taxa) { #for all taxa
   cat(header, "\n", seq_body, "\n", file = paste(concat_10_dir,final_output,sep=''), append = TRUE)
   
   # Clean up temp file
-  file.remove(paste0(taxon, ".temp"))
+  file.remove(paste0(concat_10_dir,taxon, ".temp"))
 }
 
 

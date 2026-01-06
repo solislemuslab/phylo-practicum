@@ -33,9 +33,12 @@ mv *.raxml* ../../results/RAxML/full-concatenation
 
 ### Creating our own concatenated file
 
-We could practice the process of concatenating all the sequence files in `OneCopyGenes`:
+We could practice the process of concatenating all the sequence files in `OneCopyGenes`. The specific code can be found in `06-make-supermatrix.R`.
+Briefly, we first create an empty sequence file for each taxon. Then we read in each gene and append the seqeunces to the taxon sequence files. At the end of this we should have a fully populated sequence for each taxon; we just append paste these together in a file and we have our concatenated matrix. 
 
-[need to add code here; note that different genes have different taxa and not in order]
+Our manual concatentation file is saved in a folder called `OneCopyGenes-supermatrix` and is called `manual_supermatrix.fasta`.
+
+As a check for correctness, we could then run RAxML on this concatenation file and it should yield similar results to the published concatenation file.
 
 ### Visualization
 
