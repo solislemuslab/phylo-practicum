@@ -141,3 +141,69 @@ p2
 ```
 
 <div style="text-align:center"><img src="../figures/figure1a.png" width="500"/></div>
+
+## Reproducing Figure 1B
+
+This is almost the same code as in [Species tree via concatenation: 10Mb sliding window](https://solislemuslab.github.io/phylo-practicum/glemin-wheat/code/06-species-tree-supermatrix-10mb.html).
+
+We need to be in the `results/RAxML/10Mb-concatenation` folder:
+
+```r
+library(ape)
+library(phangorn)
+library(phytools)
+library(ggplot2)
+
+tree_files <-list.files(pattern="\\.raxml.bestTree$") #List all .bestTree files. $ ensures the end of the name
+
+trees<- list() # list with all the trees
+class(trees)<- "multiPhylo" #make it a multiphylo object for ease of use with other 
+
+i<-1
+for(tree_file in tree_files){ ##go thru each file and read the tree
+  trees[[i]]<- read.tree(tree_file)
+  i<-i+1
+}
+```
+
+We need to root all trees in "H_vulgare_HVens23" to reproduce [Figure 1(B)](https://www.science.org/doi/10.1126/sciadv.aav9188):
+
+```r
+#re-reroot all our gene trees by the respective outgroup
+for(i in 1:length(trees)){
+  trees[[i]]<- root(trees[[i]],
+                         outgroup = "H_vulgare_HVens23",
+                         resolve.root=TRUE)
+  trees[[i]]<-chronos(trees[[i]]) ## make ultrametric for nicer densitree
+}
+```
+
+We will create a consensus parsimony supertree:
+
+```r
+st<-superTree(trees)
+st<-root(st,"H_vulgare_HVens23",resolve.root = T)
+```
+
+Finally, we plot the same density tree as Figure 1B:
+
+```r
+densiTree(trees,consensus=st, scaleX=T,type='cladogram', alpha=0.1)
+ape::plot.phylo(st,
+     type = "cladogram",
+     add = TRUE,
+     plot = FALSE,
+     edge.color = "black",
+     edge.width = 2,
+     show.tip.label = FALSE)
+
+
+library(ggtree)
+options(ignore.negative.edge = TRUE)
+
+
+ggtree(trees, alpha = 0.1) +
+  geom_tree2() +
+  geom_tree2(data = st, color = "black", size = 1.2)
+
+```
