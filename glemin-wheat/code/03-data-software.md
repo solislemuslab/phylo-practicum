@@ -106,6 +106,7 @@ The [ASTRAL repo](https://github.com/smirarab/ASTRAL) recommends us to use the n
 
 For me, installing with conda worked:
 ```
+conda config --add channels bioconda
 conda install aster
 ```
 
@@ -138,7 +139,7 @@ Install JuliaUp:
 curl -fsSL https://install.julialang.org | sh
 ```
 
-Install Julia:
+Install Julia (you may need to restart your terminal before you can run this command):
 ```
 juliaup add release
 ```
@@ -174,8 +175,8 @@ git clone https://github.com/pblischak/HyDe.git
 Next move into the HyDe folder and install HyDe:
 ```
 cd HyDe
-python3.11 -m pip install -r requirements.txt
-python3.11 -m pip install .
+python3 -m pip install -r requirements.txt
+python3 -m pip install .
 ```
 
 **Note for Mac users** that I had updated XCode, but did not agree to the new license, so I was getting weird errors because of that.
@@ -196,6 +197,7 @@ Inside R:
 install.packages("ape")
 install.packages("phangorn")
 install.packages("BiocManager")
+BiocManager::install("remotes")
 BiocManager::install("YuLab-SMU/treedataverse")
 install.packages("MSCquartets")
 install.packages("phytools")
