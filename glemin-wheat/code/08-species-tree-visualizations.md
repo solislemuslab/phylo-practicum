@@ -61,7 +61,8 @@ RF.dist(tree1, tree2) ## not zero!
 ```
 
 Let's try to reproduce the edge colors:
-```
+
+```r
 library(ape)
 library(ggtree)
 library(dplyr)
@@ -74,8 +75,36 @@ species_colors <- c(
   "Ae_bicornis" = "purple",
   "Ae_longissima" = "pink",
   "Ae_sharonensis" = "mediumpurple1",
-  "Ae_tauschii"    = "blue",
-  "Ae_spelta"      = "green"
+  "Ae_searsii" = "maroon2",
+  "Ae_tauschii"    = "red",
+  "T_boeoticum" = "darkgreen",
+  "T_urartu" = "green",
+  "Ae_speltoides" = "blue4",
+  "Ae_mutica" = "steelblue1"
 )
+
+tip_species <- sapply(tree1$tip.label, function(x) {
+  parts <- strsplit(x, "_")[[1]]
+  paste(parts[1:2], collapse = "_")  # combine first two parts
+})
+tip_species <- as.factor(tip_species)
+
+
+p <- ggtree(tree1)
+
+# Loop over species to color clades
+for(sp in names(species_colors)) {
+  # Get tips belonging to this species
+  tips <- tree1$tip.label[tip_species == sp]
+  # Get MRCA node
+  node <- getMRCA(tree1, tips)
+  if(!is.null(node)) {
+    p <- p + geom_hilight(node = node, fill = species_colors[sp], alpha = 0.3)
+  }
+}
+
+# Add tip labels
+p <- p + geom_tiplab()
+p
 
 ```
