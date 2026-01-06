@@ -88,13 +88,24 @@ densiTree(trees,consensus=st,scaleX=T,type='cladogram', alpha=0.1)
 ```
 
 
-We can compare the densitree with the one provided by the authors: `Densitree_OneCopyGenes.nex`:
+We can compare the densitree with the one provided by the authors: `Densitree_OneCopyGenes.nex`. We had issues reading this file into R, so we had to make some minor manual modifications (`Densitree_OneCopyGenes-modified.nex`):
+1. Added ; after "begin trees"
+2. Had to manually change taxon 0 as 47
 
 ```r
-library(treeio)
-trees <- read.nexus("../../../data/Wheat_Relative_History_Data_Glemin_et_al/Densitree_OneCopyGenes.nex")
+trees2 <- read.nexus("../../../data/Wheat_Relative_History_Data_Glemin_et_al/Densitree_OneCopyGenes-modified.nex")
 
-trees2 <- treeio::read.nexus("../../../data/Wheat_Relative_History_Data_Glemin_et_al/Densitree_OneCopyGenes.nex")
+#re-reroot all our gene trees by the respective outgroup
+for(i in 1:length(trees2)){
+  trees2[[i]]<- root(trees2[[i]],
+                         outgroup = "H_vulgare_HVens23",
+                         resolve.root=TRUE)
+  trees2[[i]]<-chronos(trees2[[i]]) ## make ultrametric for nicer densitree
+}
 
-trees2 <- read.tree("../../../data/Wheat_Relative_History_Data_Glemin_et_al/Densitree_OneCopyGenes.nex")
+st2<-superTree(trees2)
+st2<-root(st2,"H_vulgare_HVens23",resolve.root = T)
+plot(st2)
+
+densiTree(trees2,consensus=st2,scaleX=T,type='cladogram', alpha=0.1)
 ```
