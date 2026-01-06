@@ -73,7 +73,7 @@ library(phytools)
 library(ggplot2)
 
 getwd() #Check the working directory. we want to be in the results/RAxML folder
-#setwd("PathTo/results/RAxML") #replce PathTo with the correct path and run if not in the correct folder
+#setwd("PathTo/results/RAxML") #replace PathTo with the correct path and run if not in the correct folder
 
 tree_files <-list.files(pattern="\\.raxml.bestTree$") #List all .bestTree files. $ ensures the end of the name
 
@@ -115,6 +115,7 @@ for(i in 1:length(gene_trees)){
   gene_trees[[i]]<- root(gene_trees[[i]],
                          outgroup = gene_tree_outgroup[i],
                          resolve.root=TRUE)
+  gene_trees[[i]]<-chronos(gene_trees[[i]]) ## make ultrametric for nicer densitree
 }
 ```
 
@@ -155,7 +156,7 @@ From here we can see that individuals within a given species  generally create a
 We can additionally try to plot all of the genes as a densitree plot, a plot where all the gene tree topologies are overlaid over one another to give a high-level cloud of all the signal
 
 ```r
-densiTree(gene_trees,consensus=st,scaleX=T,type='cladogram')
+densiTree(gene_trees,consensus=st,scaleX=T,type='cladogram', alpha=0.05)
 ```
 
 This plot shows substantial conflict among genes. This conflict may partly reflect technical issues caused by missing taxa across genes, but it could also represent genuine biological discordance (for example, due to incomplete lineage sorting or gene flow). To improve interpretability, we could either aggregate samples at the species level or restrict the analysis to taxa present in all genes. We try the latter approach next.
