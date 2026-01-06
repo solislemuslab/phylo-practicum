@@ -140,3 +140,4 @@ p2 <- p2 + geom_tiplab()
 p2
 ```
 
+<div style="text-align:center"><img src="../figures/figure1a.png" width="400"/></div>
