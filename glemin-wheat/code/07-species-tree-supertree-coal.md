@@ -84,11 +84,8 @@ Thus if we remove the tag at the end we have a map from individual to species:
 cleaned_individuals <- sub("_[^_]+$", "", all_individuals)
 
 #map all individuals to species
-mapping <- aggregate(ind ~ sp,
-                     data = data.frame(ind = all_individuals, sp = cleaned_individuals),
-                     FUN = paste, collapse = ",")
-output_lines <- paste(mapping$sp, mapping$ind, sep = ":")
-writeLines(output_lines, "../data/Wheat_Relative_History_Data_Glemin_et_al/species_mapping.txt") ## write to file
+mapping <- paste(all_individuals,cleaned_individuals)
+writeLines(mapping, "../data/Wheat_Relative_History_Data_Glemin_et_al/species_mapping.txt") ## write to file
 ```
 
 Now our mapping is saved as `species_mapping.txt`
