@@ -157,6 +157,8 @@ Inside Julia, install packages by first pressing `]` to go into package mode (th
 add PhyloNetworks
 add SNaQ
 add PhyloPlots
+add CSV
+add DataFrames
 ```
 Leave Julia by typing `exit()`.
 

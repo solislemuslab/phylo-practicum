@@ -33,8 +33,8 @@ We will reproduce the phylogenetic analyses of [Pervasive hybridizations in the 
 | 6 | 02/27 | Species tree: supermatrix (10Mb sliding window) | | [notes](https://github.com/solislemuslab/phylo-practicum/glemin-wheat/code/06-species-tree-supermatrix-10mb.html) | Finish the RAxML analyses on your own and visualize the results; Optional: run the script to create the 10Mb windows yourself |
 | 7 | 03/06 | Species tree: supertree and coalescent-based (new analysis) | | [notes](https://github.com/solislemuslab/phylo-practicum/glemin-wheat/code/07-species-tree-supetree-coal.html) | Finish the wASTRAL analyses |
 | 8 | 03/13 | Species tree results (Figure 1) | Install and read about [ggtree](https://yulab-smu.top/treedata-book/) | [notes](https://github.com/solislemuslab/phylo-practicum/glemin-wheat/code/08-species-tree-visualizations.html)
-| 9 | 03/20 | 
-| 10 | 03/27 | Species network inference (new analysis)
+| 9 | 03/20 | Species network inference (new analysis)
+| 10 | 03/27 | 
 | 11 | 04/03 | Spring break
 | 12 | 04/10 | Hybrid tests: HyDe
 | 13 | 04/17 | Hybrid tests: MSCQuartets (new analysis)

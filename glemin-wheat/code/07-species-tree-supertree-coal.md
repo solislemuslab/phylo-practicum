@@ -60,14 +60,16 @@ plot(rtre)
 ## At the species level
 
 Since we have multiple individuals per species for some species, we can use the multispecies coalescent model to infer a species level phylogeny.
-However, we first need to create a mapping from each individual ID to a species ID. We will create this mapping in R:
+However, we first need to create a mapping from each individual ID to a species ID. 
+
+We will create this mapping in R (inside `code`):
 
 ```r
 ##First we get all the individual names
 genes_dir <- "../data/Wheat_Relative_History_Data_Glemin_et_al/OneCopyGenes/"
 gene_files<-paste(genes_dir,list.files(genes_dir,pattern='\\.aln$'),sep='')
 
-all_taxa <- character()
+all_individuals <- character()
 i<-1
 for(f in gene_files){
   headers <- rownames(read.dna(f, format = "fasta"))
@@ -85,7 +87,7 @@ cleaned_individuals <- sub("_[^_]+$", "", all_individuals)
 
 #map all individuals to species
 mapping <- paste(all_individuals,cleaned_individuals)
-writeLines(mapping, "../data/Wheat_Relative_History_Data_Glemin_et_al/07-species_mapping.txt") ## write to file
+writeLines(mapping, "../results/07-species_mapping.txt") ## write to file
 ```
 
 Now our mapping is saved as `07-species_mapping.txt`
