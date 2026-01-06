@@ -65,7 +65,7 @@ dup_inds <-rep(NA,length(genes))
 i<-1
 for(gene in genes){
   aln <- read.dna(file=paste(genes_dir,gene,sep=''),format='fasta')
-  dups_inds[i]<-any(duplicated(rownames(aln)))
+  dup_inds[i]<-any(duplicated(rownames(aln)))
   i<-i+1
   if(i %% 500 ==0){
     print(i)
