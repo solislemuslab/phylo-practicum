@@ -20,13 +20,12 @@ Now we can visualize it in R:
 ```r
 library(ape)
 tre = read.tree(file="07-supertree.tre")
+tre = tre[[2]] ## tree stored in second entry
 plot(tre)
 
 rtre = root(tre,outgroup="H_vulgare_HVens23", resolve.root=TRUE)
 plot(rtre)
 ```
-
-
 
 # Species tree via coalescent models
 
@@ -36,6 +35,15 @@ We have to be in the `results/RAxML` path and run:
 ```
 wastral -i 04-all_gene_trees.tre -o 08-species-tree.tre
 ```
+
+Note that weighted ASTRAL has three modes (read more [here](https://github.com/chaoszhang/ASTER/blob/master/tutorial/wastral.md)):
+1. Weighted ASTRAL by Branch Support (mode 2)
+2. Weighted ASTRAL by Branch Length (mode 3)
+3. Weighted ASTRAL - Hybrid (default)
+
+"Hybrid" mode combines both types of weights.
+Our gene trees do not have branch support, so we assume "hybrid" mode results in the same output as "mode=3" (branch length weighting). We could have explicitly added the flag `--mode 3`.
+
 
 Now we can visualize it in R:
 ```r
