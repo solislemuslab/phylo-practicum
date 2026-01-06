@@ -33,7 +33,7 @@ We will use [Weighted ASTRAL](https://github.com/chaoszhang/ASTER/blob/master/tu
 
 We have to be in the `results/RAxML` path and run:
 ```
-wastral -i 04-all_gene_trees.tre -o 08-species-tree.tre
+wastral -i 04-all_gene_trees.tre -o 07-species-tree-wastral.tre
 ```
 
 Note that weighted ASTRAL has three modes (read more [here](https://github.com/chaoszhang/ASTER/blob/master/tutorial/wastral.md)):
@@ -49,7 +49,7 @@ The wastral command took around 45 minutes to finish in my computer.
 Now we can visualize it in R:
 ```r
 library(ape)
-tre = read.tree(file="08-species-tree.tre")
+tre = read.tree(file="07-species-tree-wastral.tre")
 plot(tre)
 
 rtre = root(tre,outgroup="H_vulgare_HVens23", resolve.root=TRUE)
