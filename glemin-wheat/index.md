@@ -31,8 +31,8 @@ We will reproduce the phylogenetic analyses of [Pervasive hybridizations in the 
 | 4 | 02/13 | Gene tree inference | | [notes](https://github.com/solislemuslab/phylo-practicum/glemin-wheat/code/04-gene-trees.html) | Run RAxML on all genes |
 | 5 | 02/20 | Species tree: supermatrix (full concatenation) | | [notes](https://github.com/solislemuslab/phylo-practicum/glemin-wheat/code/05-species-tree-supermatrix-full.html) | Finish the RAxML analyses on your own and visualize the results; Optional: run the script to concatenate genes yourself |
 | 6 | 02/27 | Species tree: supermatrix (10Mb sliding window) | | [notes](https://github.com/solislemuslab/phylo-practicum/glemin-wheat/code/06-species-tree-supermatrix-10mb.html) | Finish the RAxML analyses on your own and visualize the results; Optional: run the script to create the 10Mb windows yourself |
-| 7 | 03/06 | Species tree: supertree and coalescent-based (new analysis) | | [notes](https://github.com/solislemuslab/phylo-practicum/glemin-wheat/code/07-species-tree-supetree-coal.html)
-| 8 | 03/13 | Species tree results (Figure 1)
+| 7 | 03/06 | Species tree: supertree and coalescent-based (new analysis) | | [notes](https://github.com/solislemuslab/phylo-practicum/glemin-wheat/code/07-species-tree-supetree-coal.html) | Finish the wASTRAL analyses |
+| 8 | 03/13 | Species tree results (Figure 1) | Install and read about [ggtree](https://yulab-smu.top/treedata-book/) | 
 | 9 | 03/20 | 
 | 10 | 03/27 | Species network inference (new analysis)
 | 11 | 04/03 | Spring break
