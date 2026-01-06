@@ -199,3 +199,26 @@ dev.off()
 ```
 
 <div style="text-align:center"><img src="../figures/figure1b.png" width="700"/></div>
+
+## New coalescent-based species tree (wASTRAL)
+
+We now want to compare the original species tree with the new coalescent-based species tree we inferred with wASTRAL.
+
+First, we can calculate the RF distance:
+```r
+> RF.dist(tree1,tree3)
+[1] 86 ## not the same tree!
+```
+
+Then, we plot the individual level species tree along with the full concatenation tree (`tree1`):
+
+```r
+tree3 = read.tree(file="07-individual-species-tree.tre")
+tree3 = root(tree3,outgroup="H_vulgare_HVens23", resolve.root=TRUE)
+
+par(mfrow=c(1,2), mar = c(0.1, 0.1, 0.1, 0.1))
+plot(tree1)
+plot(tree3)
+```
+
+[add here plot for species level species tree wastral and compare to figure 1a]
