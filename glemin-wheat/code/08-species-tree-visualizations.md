@@ -60,7 +60,7 @@ library(phangorn)
 RF.dist(tree1, tree2) ## not zero!
 ```
 
-Let's try to reproduce the edge colors:
+Let's try to reproduce the edge colors on the full concatenation tree (`tree1`):
 
 ```r
 library(ape)
@@ -106,5 +106,37 @@ for(sp in names(species_colors)) {
 # Add tip labels
 p <- p + geom_tiplab()
 p
-
 ```
+
+We might want to rotate manually some clades to mimic Figure 1A:
+```r
+p + geom_text2(aes(subset = !isTip, label = node), hjust = -0.3)
+```
+
+We want to rotate the following clades:
+```r
+p <- ggtree(tree1)
+
+p2 <- rotate(p, node = 55)
+p2 <- rotate(p2, node = 62)
+p2 <- rotate(p2, node = 50)
+p2 <- rotate(p2, node = 49)
+p2 <- rotate(p2, node = 69)
+p2 <- rotate(p2, node = 83)
+p2 <- rotate(p2, node = 88)
+p2 <- rotate(p2, node = 71)
+p2 <- rotate(p2, node = 74)
+
+
+for(sp in names(species_colors)) {
+  tips <- tree1$tip.label[tip_species == sp]
+  node <- getMRCA(tree1, tips)  # this works on phylo object
+  if(!is.null(node)) {
+    p2 <- p2 + geom_hilight(node = node, fill = species_colors[sp], alpha = 0.3)
+  }
+}
+
+p2 <- p2 + geom_tiplab()
+p2
+```
+
