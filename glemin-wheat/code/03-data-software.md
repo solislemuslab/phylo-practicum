@@ -12,13 +12,13 @@ Most class materials are accessible from the [course repository](https://github.
 Specifically, there is a folder called `glemin-wheat` that we will be using for this course. This folder contains all scripts nessecary to recreate the analyses of [Glemin et al (2019)](https://www.science.org/doi/10.1126/sciadv.aav9188). These scripts assume the specific directory structure that is already set up in this repo. While we encourage students to use this structure, you can organize your files however makes the most sense for you, but be noted that some scripts may need to be altered accordingly. The structure we use is:
 ```
 glemin-wheat/
-├── README.md            <-- Contains an Overview of the contents
+├── index.md            <-- Contains an Overview of the contents
 ├── data/
 │   ├── Wheat_Relative_History_Data_Glemin_et_al/   Folder that will contain the wheat data.
 │   │	├── README.txt     <-- Describes the downloadable data from the paper
 ├── code/                  <-- Scripts and bash files to run the analyses.
-│	|	├── Y-XXXXX.md     <-- Markdown for class number Y on how to run XXXXX analyses
-| |	├── Y-ZZZZZ.sh     <-- Bash script for class number Y to run analysis ZZZZZ
+│	├── Y-XXXXX.md     <-- Markdown for class number Y on how to run XXXXX analyses
+| ├── Y-ZZZZZ.sh     <-- Bash script for class number Y to run analysis ZZZZZ
 ├── results/               <-- This folder will contain the results generated for each analysis
 
 ```
@@ -84,7 +84,130 @@ Confirm that you can run RAxML by typing `raxml-ng` in the terminal.
 This will need to be built in the Windows Subsystem for Linux. First, download the Linux binary for [RAxML-ng](https://github.com/amkozlov/raxml-ng/releases/download/1.2.2/raxml-ng_v1.2.2_linux_x86_64.zip). Extract the contents from this folder and you will find an executable file named `raxml-ng`, either add the location of raxml-ng to your `PATH` or move the file to a location already in your `PATH`. Now from the WSL, you can confirm you have installed RAxML with the command `raxml-ng -h`.
 
 
-## 2. bppSuite (skipped)
+## 2. SuperTriplets
+
+SuperTriplets comes packaged as a Java program and thus requires Java. You can check if you have Java installed on your machine with the command `java -h`. If Java is not installed, you can download it [here](https://www.java.com/en/). 
+
+**Note for Windows users**: unless you explicitly download Java in the WSL, you will only be able to use Java programs outside your WSL (i.e., in the normal command prompt before typing `wsl`).
+
+There is download information in the SuperTriplets [website](https://www.agap-ge2pop.org/supertriplets/download/).
+
+You simply download the java file `SuperTriplets_v1.1.jar`. I put it in my computer `software` folder inside a subfolder named `supertriplets`. We will have to use the whole path when calling this function:
+```
+java -jar -Xmx500m ~/software/supertriplets/SuperTriplets_v1.1.jar newick_file.nwk outfile
+```
+
+## 3. ASTRAL
+
+The [ASTRAL repo](https://github.com/smirarab/ASTRAL) recommends us to use the new C code [ASTER](https://github.com/chaoszhang/ASTER). Installation instructions are within.
+
+
+### For Mac
+
+For me, installing with conda worked:
+```
+conda install aster
+```
+
+To know where everything was installed:
+```
+$ which wastral
+/Users/Clauberry/.julia/conda/3/bin/wastral
+```
+
+And you can test it works by:
+```
+$ wastral
+```
+
+
+### For Windows 
+
+You can download the binary from [here](https://github.com/chaoszhang/ASTER/archive/refs/heads/Windows.zip). All of the various forms of ASTRAL are included in the `exe/` folder and you should make sure these files are a part of your `PATH`. You can confirm correct installation by running `waster -h`.
+
+Alternatively, if you need to install from source, you can build in WSL and installation instructions can be found [here](https://github.com/chaoszhang/ASTER?tab=readme-ov-file#for-linuxmacoswsl-users).
+
+## 4. Julia and packages
+
+I recommend installing Julia via [JuliaUp](https://github.com/JuliaLang/juliaup) as this allows you to have multiple Julia versions installed. 
+
+### For Mac
+
+Install JuliaUp:
+```
+curl -fsSL https://install.julialang.org | sh
+```
+
+Install Julia:
+```
+juliaup add release
+```
+
+### For Windows
+
+Julia can be installed by following the directions [here](https://julialang.org/downloads/) or directly from the Julia website [Windows app store](https://apps.microsoft.com/detail/9njnww8pvkmn?hl=en-US&gl=US).
+
+### Once Julia is Installed
+
+
+Start Julia by typing `julia` in the terminal.
+Inside Julia, install packages by first pressing `]` to go into package mode (the prompt will change to `(@v1.12) pkg>`):
+```
+add PhyloNetworks
+add SNaQ
+add PhyloPlots
+```
+Leave Julia by typing `exit()`.
+
+## 5. HyDe
+
+We will follow the installation commands from the [github repo](https://github.com/pblischak/HyDe).
+
+HyDe requires Python. You can install the latest version of Python for your machine [here](https://www.python.org/downloads/). You can check installation by running the command `python -h` or `pythonX.XX -h` where X.XX is the version number of python.
+
+
+The files can be downloaded with:
+```
+git clone https://github.com/pblischak/HyDe.git
+```
+
+Next move into the HyDe folder and install HyDe:
+```
+cd HyDe
+python3.11 -m pip install -r requirements.txt
+python3.11 -m pip install .
+```
+
+**Note for Mac users** that I had updated XCode, but did not agree to the new license, so I was getting weird errors because of that.
+
+**Note for Windows users:** You will need 
+a the Microsoft Visual C++ compiler that is at least version 14.0; that can be downloaded [here]( https://visualstudio.microsoft.com/visual-cpp-build-tools/
+). When going thru the installer, select "Desktop Development with C++". Alternatively, if you downloaded Python for the WSL and want HyDe on the WSL, you can follow the download instructions using any C++ compiler.
+
+
+You can confirm installation by running `make test`.
+
+## 6. R
+
+Those that don't have them should install R and RStudio, see [here](https://posit.co/download/rstudio-desktop/).
+
+Inside R:
+```
+install.packages("ape")
+install.packages("phangorn")
+install.packages("BiocManager")
+BiocManager::install("YuLab-SMU/treedataverse")
+install.packages("MSCquartets")
+install.packages("phytools")
+install.packages("ggplot2")
+```
+
+
+# Unused software
+
+The authors used the following software that we won't use:
+
+## bppSuite
 
 The software repository has instructions for installation [here](https://github.com/BioPP/bppsuite).
 
@@ -171,128 +294,10 @@ From the paper, it seems they only use `bppSuite` for re-rooting the gene trees:
 
 So, we will skip this software for now.
 
-## 3. SSIMUL
+## SSIMUL
 
 We download the binaries from the software website for Mac and Linux [here](http://www.atgc-montpellier.fr/ssimul/).
 
 The zipped folder `ssimul.zip` contains the executables.
 
 **Note for Windows users:** We will use again the Windows Subsystem for Linux.
-
-
-## 4. SuperTriplets
-
-SuperTriplets comes packaged as a Java program and thus requires Java. You can check if you have Java installed on your machine with the command `java -h`. If Java is not installed, you can download it [here](https://www.java.com/en/). 
-
-**Note for Windows users**: unless you explicitly download Java in the WSL, you will only be able to use Java programs outside your WSL (i.e., in the normal command prompt before typing `wsl`).
-
-There is download information in the SuperTriplets [website](https://www.agap-ge2pop.org/supertriplets/download/).
-
-You simply download the java file `SuperTriplets_v1.1.jar`. I put it in my computer `software` folder inside a subfolder named `supertriplets`. We will have to use the whole path when calling this function:
-```
-java -jar -Xmx500m ~/software/supertriplets/SuperTriplets_v1.1.jar newick_file.nwk outfile
-```
-
-## 5. ASTRAL
-
-The [ASTRAL repo](https://github.com/smirarab/ASTRAL) recommends us to use the new C code [ASTER](https://github.com/chaoszhang/ASTER). Installation instructions are within.
-
-
-### For Mac
-
-For me, installing with conda worked:
-```
-conda install aster
-```
-
-To know where everything was installed:
-```
-$ which wastral
-/Users/Clauberry/.julia/conda/3/bin/wastral
-```
-
-And you can test it works by:
-```
-$ wastral
-```
-
-
-### For Windows 
-
-You can download the binary from [here](https://github.com/chaoszhang/ASTER/archive/refs/heads/Windows.zip). All of the various forms of ASTRAL are included in the `exe/` folder and you should make sure these files are a part of your `PATH`. You can confirm correct installation by running `waster -h`.
-
-Alternatively, if you need to install from source, you can build in WSL and installation instructions can be found [here](https://github.com/chaoszhang/ASTER?tab=readme-ov-file#for-linuxmacoswsl-users).
-
-## 6. Julia and packages
-
-I recommend installing Julia via [JuliaUp](https://github.com/JuliaLang/juliaup) as this allows you to have multiple Julia versions installed. 
-
-### For Mac
-
-Install JuliaUp:
-```
-curl -fsSL https://install.julialang.org | sh
-```
-
-Install Julia:
-```
-juliaup add release
-```
-
-### For Windows
-
-Julia can be installed by following the directions [here](https://julialang.org/downloads/) or directly from the Julia website [Windows app store](https://apps.microsoft.com/detail/9njnww8pvkmn?hl=en-US&gl=US).
-
-### Once Julia is Installed
-
-
-Start Julia by typing `julia` in the terminal.
-Inside Julia, install packages by first pressing `]` to go into package mode (the prompt will change to `(@v1.12) pkg>`):
-```
-add PhyloNetworks
-add SNaQ
-add PhyloPlots
-```
-Leave Julia by typing `exit()`.
-
-## 7. HyDe
-
-We will follow the installation commands from the [github repo](https://github.com/pblischak/HyDe).
-
-HyDe requires Python. You can install the latest version of Python for your machine [here](https://www.python.org/downloads/). You can check installation by running the command `python -h` or `pythonX.XX -h` where X.XX is the version number of python.
-
-
-The files can be downloaded with:
-```
-git clone https://github.com/pblischak/HyDe.git
-```
-
-Next move into the HyDe folder and install HyDe:
-```
-cd HyDe
-python3.11 -m pip install -r requirements.txt
-python3.11 -m pip install .
-```
-
-**Note for Mac users** that I had updated XCode, but did not agree to the new license, so I was getting weird errors because of that.
-
-**Note for Windows users:** You will need 
-a the Microsoft Visual C++ compiler that is at least version 14.0; that can be downloaded [here]( https://visualstudio.microsoft.com/visual-cpp-build-tools/
-). When going thru the installer, select "Desktop Development with C++". Alternatively, if you downloaded Python for the WSL and want HyDe on the WSL, you can follow the download instructions using any C++ compiler.
-
-
-You can confirm installation by running `make test`.
-
-## 8. R
-
-Those that don't have them should install R and RStudio, see [here](https://posit.co/download/rstudio-desktop/).
-
-Inside R:
-```
-install.packages("ape")
-install.packages("phangorn")
-install.packages("BiocManager")
-BiocManager::install("YuLab-SMU/treedataverse")
-install.packages("MSCquartets")
-install.packages("phytools")
-```

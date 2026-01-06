@@ -36,7 +36,7 @@ ls | head -n10 | xargs -I {} cp "{}" ../OneCopyGenes-trimmed
 
 The subfolder `OneCopyGenes-trimmed` now contains the first 10 alignments from `OneCopyGenes`.
 
-We could run RAxML on the terminal directly with the `raxml-ng` executable but instead we will run it through a bash script so that we can loop over genes and we can move output files to a `results` folder. To automate this process we wrote the bash script called `04-raxml.sh`. We have commented this script that explains some of the basic commands but if you're interested in using bash to automate some processes, we recommend checking out [Learn X in Y minutes (where X=Bash)](https://learnxinyminutes.com/bash/).
+We could run RAxML on the terminal directly with the `raxml-ng` executable one by one, but instead we will run it through a bash script so that we can loop over genes and we can move output files to a `results` folder. To automate this process we wrote the bash script called `04-raxml.sh`. If you're interested in using bash to automate some processes, we recommend checking out [Learn X in Y minutes (where X=Bash)](https://learnxinyminutes.com/bash/).
 
 Note that we will not run bootstrap because this was used on previous steps for data filtering and it save computation time.
 
@@ -62,13 +62,15 @@ You can find more details about the output files [here](https://github.com/amkoz
 
 ## Analyzing the results
 
-We will primarily be analyzing the inferred gene trees in R. We have provided the following R script `3-gene-tree-analysis.R` that contains the code we will run thru here.
+We will primarily be analyzing the inferred gene trees in R.
 
-First we want to read in each gene tree; for this we will primarily be focusing on the output file with the suffix `raxml.bestTree` which contains the best found bifurcating phylogeny.
+First we want to read in each gene tree; for this we will primarily be focusing on the output file with the suffix `raxml.bestTree` which contains the maximum likelihood tree.
 
 ```r
 library(ape)
 library(phangorn)
+library(phytools)
+library(ggplot2)
 
 getwd() #Check the working directory. we want to be in the results/RAxML folder
 #setwd("PathTo/results/RAxML") #replce PathTo with the correct path and run if not in the correct folder
@@ -220,7 +222,7 @@ Then, inside the `code` folder, we run the `04-raxml.sh` bash script:
 
 ```
 cd code
-04-raxml.sh
+./04-raxml.sh
 ```
 
 This command will take around 9 hours to run. 

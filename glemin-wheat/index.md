@@ -25,13 +25,13 @@ We will reproduce the phylogenetic analyses of [Pervasive hybridizations in the 
 
 | Week | Session | Topic | Pre-class work | Lecture notes | Homework | 
 | :---: | :---:   | :---: | :---:         | :---: | :---: | 
-| 1 | 01/23 | Introduction and reproducibility practices | | [notes](https://github.com/solislemuslab/phylo-practicum/blob/main/notes/1-intro-reproducibility.md) | Set-up local folder for the class ([HW](https://github.com/solislemuslab/phylo-practicum/blob/main/notes/1-intro-reproducibility.md#homework)) |
+| 1 | 01/23 | Introduction and reproducibility practices | | [notes](https://solislemuslab.github.io/phylo-practicum/notes/1-intro-reproducibility.html) | Set-up local folder for the class ([HW](https://github.com/solislemuslab/phylo-practicum/blob/main/notes/1-intro-reproducibility.md#homework)) |
 | 2 | 01/30 | Paper discussion | Read [Glemin et al, 2019](https://www.science.org/doi/10.1126/sciadv.aav9188); Optional reading [Marcussen et al, 2014](https://www.science.org/doi/full/10.1126/science.1250092)
-| 3 | 02/06 | Goal of the analyses, required software and data | | [notes](https://github.com/solislemuslab/phylo-practicum/blob/main/glemin-wheat/code/03-data-software.md) | Make sure all software is properly installed in your computer |
-| 4 | 02/13 | Gene tree inference | | [notes](https://github.com/solislemuslab/phylo-practicum/blob/main/glemin-wheat/code/04-gene-trees.md) | Run RAxML on all genes |
-| 5 | 02/20 | Species tree: supermatrix (full concatenation) | | [notes](https://github.com/solislemuslab/phylo-practicum/blob/main/glemin-wheat/code/05-species-tree-supermatrix-full.md)
-| 6 | 02/27 | Species tree: supermatrix (10Mb sliding window) | | [notes](https://github.com/solislemuslab/phylo-practicum/blob/main/glemin-wheat/code/06-species-tree-supermatrix-10mb.md)
-| 7 | 03/06 | Species tree: supertree and coalescent-based (new analysis) | | [notes](https://github.com/solislemuslab/phylo-practicum/blob/main/glemin-wheat/code/07-species-tree-supetree-coal.md)
+| 3 | 02/06 | Goal of the analyses, required software and data | | [notes](https://solislemuslab.github.io/phylo-practicum/glemin-wheat/code/03-data-software.html) | Make sure all software is properly installed in your computer |
+| 4 | 02/13 | Gene tree inference | | [notes](https://github.com/solislemuslab/phylo-practicum/glemin-wheat/code/04-gene-trees.html) | Run RAxML on all genes |
+| 5 | 02/20 | Species tree: supermatrix (full concatenation) | | [notes](https://github.com/solislemuslab/phylo-practicum/glemin-wheat/code/05-species-tree-supermatrix-full.html)
+| 6 | 02/27 | Species tree: supermatrix (10Mb sliding window) | | [notes](https://github.com/solislemuslab/phylo-practicum/glemin-wheat/code/06-species-tree-supermatrix-10mb.html)
+| 7 | 03/06 | Species tree: supertree and coalescent-based (new analysis) | | [notes](https://github.com/solislemuslab/phylo-practicum/glemin-wheat/code/07-species-tree-supetree-coal.html)
 | 8 | 03/13 | Species tree results (Figure 1)
 | 9 | 03/20 | 
 | 10 | 03/27 | Species network inference (new analysis)
