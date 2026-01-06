@@ -12,7 +12,7 @@ We have 4 estimated species trees (in `results/RAxML`):
 - full concatenation (`full-concatenation/triticeae_allindividuals_OneCopyGenes.fasta.raxml.bestTree`)
 - consensus of 10Mb window concatenation trees (folder `10Mb-concatenation`)
 - supertree `07-supertree.tre`
-- wASTRAL tree `07-species-tree-wastral.tre`
+- wASTRAL tree `07-individual-species-tree.tre`
 
 ## Reproducing Figure 1A
 
@@ -140,4 +140,4 @@ p2 <- p2 + geom_tiplab()
 p2
 ```
 
-<div style="text-align:center"><img src="../figures/figure1a.png" width="400"/></div>
+<div style="text-align:center"><img src="../figures/figure1a.png" width="500"/></div>
