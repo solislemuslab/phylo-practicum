@@ -26,6 +26,8 @@ rtre = root(tre,outgroup="H_vulgare_HVens23", resolve.root=TRUE)
 plot(rtre)
 ```
 
+
+
 # Species tree via coalescent models
 
 We will use [Weighted ASTRAL](https://github.com/chaoszhang/ASTER/blob/master/tutorial/wastral.md) to reconstruct the species tree under the coalescent model. The input is the list of RAxML estimated gene trees with branch lengths: `04-all_gene_trees.tre`.

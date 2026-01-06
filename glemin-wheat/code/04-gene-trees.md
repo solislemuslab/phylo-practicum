@@ -60,7 +60,7 @@ Ae_bicornis_Tr406_BIS2_Contig10132_simExt_macseNT_noFS_clean.aln.raxml.bestModel
 
 You can find more details about the output files [here](https://github.com/amkozlov/raxml-ng/wiki/Output:-files-and-settings#output-prefix). 
 
-## Analyzing the results
+### Analyzing the results
 
 We will primarily be analyzing the inferred gene trees in R.
 
@@ -118,8 +118,7 @@ for(i in 1:length(gene_trees)){
 }
 ```
 
-### Visualizing the results
-
+### Visualizing the trees
 
 We can plot the gene trees with the `plot()` command:
 
@@ -128,7 +127,7 @@ We can plot the gene trees with the `plot()` command:
 plot(gene_trees[[2]]) # plots the second gene tree
 ```
 
-It additionally is worth understanding what the data look like. One important thing is considering how we filtered our data and how this influences the methods we can use downstream. Currently our dataset consists of all genes that have at most one copy per individual. One important distinction is that some of these genes have missing taxa (i.e., not all taxa may be present on every gene). This poses certain challenges for summarizing and visualizing the overall signal for species relationships. One common practice is to limit the data to include only complete records (either keeping only genes that have all individuals or only keeping individuals that are present on all genes). However, supertree methods are capable of handling missing taxa. Nonethless we may want an idea of how often individuals are present across our set of genes:
+It's important to understand the structure of our data and how filtering choices affect downstream methods. Our dataset currently contains only genes with at most one copy per individual (i.e., single-copy genes). Many genes nevertheless lack some taxa — not every taxon appears in every gene — which makes it harder to summarize and visualize species relationships. A common solution is to restrict the data to complete records (for example, keep only genes that include all individuals, or keep only individuals that appear on all genes). However, supertree methods can handle missing taxa. In any case, we should quantify how often each taxon (or individual) is present across genes:
 
 ```r
 # see which genes have which taxa
@@ -141,7 +140,7 @@ ggplot(df, aes(x = all_labels, y = Freq)) +
   theme(axis.text.x = element_text(angle = 90))
 ```
 
-In our set of 10 genes it appears that most individuals seem well represented with the exception of the T_boeoticum individuals. If we were using methods that could not account for missing taxa, these results that indicate that we may want to drop T_boeoticum as a species or we may need to aggregate individuals at the species level. 
+In our set of 10 genes it appears that most individuals seem well represented with the exception of the T_boeoticum individuals. If we were using methods that could not account for missing taxa, these results that indicate that we may want to drop T_boeoticum as a species or we may need to aggregate individuals at the species level.
 
 However, for supertree methods we can use the dataset as is. We will explore supertree methods more later in the course but we can apply a simple maximum parsimony approach to create a supertree from all our genes to get a sense of the overall signal from the gene trees.
 
@@ -159,7 +158,7 @@ We can additionally try to plot all of the genes as a densitree plot, a plot whe
 densiTree(gene_trees,consensus=st,scaleX=T,type='cladogram')
 ```
 
-From this we can see a lot of conflict across genes. This could be an artifact of the difficulty of making these plots when there are missing taxa across genes or it could be a biological source of discord (e.g., ILS or gene flow). For this type of plot it might be good to either aggregate our samples at the species level or to restrict our taxa to only those that are found at all genes, we try the latter here.
+This plot shows substantial conflict among genes. This conflict may partly reflect technical issues caused by missing taxa across genes, but it could also represent genuine biological discordance (for example, due to incomplete lineage sorting or gene flow). To improve interpretability, we could either aggregate samples at the species level or restrict the analysis to taxa present in all genes. We try the latter approach next.
 
 ```r
 common_tips <- Reduce(
@@ -170,20 +169,22 @@ common_tips <- Reduce(
 length(common_tips) ## 6
 
 trees_pruned <- lapply(
-  gene_trees,
+  gene_trees[1:10],
   function(tr) drop.tip(tr, setdiff(tr$tip.label, common_tips))
 )
+
+## to remove NULLs:
+## trees_pruned <- trees_pruned[!sapply(trees_pruned, is.null)]
 
 densityTree(trees_pruned,use.edge.length=FALSE,type="cladogram",nodes="centered")
 ```
 
 From here we can see that this approach loses a lot of information (taxa), and this is only when using 10 genes! Even fewer (if any) taxa will have complete records across all sampled genes. This highlights the difficulties of working with empirical datasets and how care is needed when filtering and subsetting your data while trying to maintain signal.
 
-
 For more information on density trees, you can see this [phytools blog](https://blog.phytools.org/2017/04/slanted-phylogram-cladogram-densitytree.html).
 
 
-Now, we want to compare the ML trees for each of the 20 RAxML runs (in the `.mlTrees` file). We will do a densitree. This can help us visualize the best tree across each run. We may want this type of a visualization had we performed bootstrap analysis, then we could get a sense of the uncertainty of our estimates across bootstrap replicates. 
+Now, we want to compare the ML trees for each of the 20 RAxML runs (in the `.mlTrees` file). For this, we will do a densitree. This can help us visualize the best tree across each run. With bootstrap analyses, this visualization could illustrate uncertainty across replicates.
 
 ```r
 trees = read.tree(file="Ae_bicornis_Tr406_BIS2_Contig10132_simExt_macseNT_noFS_clean.aln.raxml.mlTrees")
@@ -203,8 +204,6 @@ Also if we don't care about differences in branch lengths and we want to focus o
 densityTree(trees,use.edge.length=FALSE,type="cladogram",nodes="centered")
 densityTree(rtrees,use.edge.length=FALSE,type="cladogram",nodes="centered")
 ```
-
-[note: the plot looks weird for the rooted trees, not sure why]
 
 
 ## Running RAxML on all the genes
@@ -227,7 +226,7 @@ cd code
 
 This command will take around 9 hours to run. 
 
-We can use similar R commands to visualize the results.
+We can read the trees into R for similar visualizations (not shown).
 
 ```r
 library(ape)
@@ -245,7 +244,11 @@ for(tree_file in tree_files){ ##go thru each file and read the tree
   gene_trees[[i]]<- read.tree(tree_file)
   i<-i+1
 }
-
-## We will write the gene trees to file for SuperTriplets later on:
-write.tree(gene_trees, file="all_gene_trees.tre")
 ```
+
+Note that for the list of all gene trees we want to save them to file for future analyses:
+
+```r
+write.tree(gene_trees, file="04-all_gene_trees.tre")
+```
+
