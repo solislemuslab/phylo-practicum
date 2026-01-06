@@ -29,11 +29,13 @@ plot(rtre)
 
 # Species tree via coalescent models
 
+## At the individual level
+
 We will use [Weighted ASTRAL](https://github.com/chaoszhang/ASTER/blob/master/tutorial/wastral.md) to reconstruct the species tree under the coalescent model. The input is the list of RAxML estimated gene trees with branch lengths: `04-all_gene_trees.tre`.
 
 We have to be in the `results/RAxML` path and run:
 ```
-wastral -i 04-all_gene_trees.tre -o 07-species-tree-wastral.tre
+wastral -i 04-all_gene_trees.tre -o 07-individual-species-tree.tre
 ```
 
 Note that weighted ASTRAL has three modes (read more [here](https://github.com/chaoszhang/ASTER/blob/master/tutorial/wastral.md)):
@@ -49,9 +51,49 @@ The wastral command took around 45 minutes to finish in my computer.
 Now we can visualize it in R:
 ```r
 library(ape)
-tre = read.tree(file="07-species-tree-wastral.tre")
+tre = read.tree(file="07-individual-species-tree.tre")
 plot(tre)
-
 rtre = root(tre,outgroup="H_vulgare_HVens23", resolve.root=TRUE)
 plot(rtre)
+```
+
+## At the species level
+
+Since we have multiple individuals per species for some species, we can use the multispecies coalescent model to infer a species level phylogeny.
+However, we first need to create a mapping from each individual ID to a species ID. We will create this mapping in R:
+
+```r
+##First we get all the individual names
+genes_dir <- "../data/Wheat_Relative_History_Data_Glemin_et_al/OneCopyGenes/"
+gene_files<-paste(genes_dir,list.files(genes_dir,pattern='\\.aln$'),sep='')
+
+all_taxa <- character()
+i<-1
+for(f in gene_files){
+  headers <- rownames(read.dna(f, format = "fasta"))
+  all_individuals <- unique(c(all_individuals, headers))
+}
+all_individuals <- sort(all_individuals) # Sort alphabetically for consistency
+all_individuals
+```
+
+Here we can see that each individual ID is just the species ID with a unique identifier at the end (e.g., "SpeciesID_IndividualID").
+Thus if we remove the tag at the end we have a map from individual to species:
+
+```r
+cleaned_individuals <- sub("_[^_]+$", "", all_individuals)
+
+#map all individuals to species
+mapping <- aggregate(ind ~ sp,
+                     data = data.frame(ind = all_individuals, sp = cleaned_individuals),
+                     FUN = paste, collapse = ",")
+output_lines <- paste(mapping$sp, mapping$ind, sep = ":")
+writeLines(output_lines, "../data/Wheat_Relative_History_Data_Glemin_et_al/species_mapping.txt") ## write to file
+```
+
+Now our mapping is saved as `species_mapping.txt`
+
+To make a species-level phylogeny, we just need to specify our mapping file in Weighted ASTRAL with the `-a` flag:
+```
+wastral -i 04-all_gene_trees.tre -a species_mapping.txt -o 07-species-tree.tre
 ```
