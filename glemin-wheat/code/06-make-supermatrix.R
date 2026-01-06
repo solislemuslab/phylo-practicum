@@ -31,7 +31,7 @@ for(i in seq_along(gene_files)) {
 
   j<-j+1
   if(j%%500 ==0 ){
-    print(j)
+    print(paste(j, "out of",length(gene_files),'genes',sep=' '))
   }
   # Read alignment
   aln <- read.dna(gene_files[i], format = "fasta", as.character = TRUE)
