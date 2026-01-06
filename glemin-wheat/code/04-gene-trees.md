@@ -195,10 +195,11 @@ rtrees <- lapply(trees, function(tr) {
 })
 ```
 
-Plot the densitree (before and after rooting):
-```
+Plot the densiTree (before and after rooting):
+```r
 densityTree(trees,type="cladogram",nodes="intermediate")
 densityTree(rtrees,type="cladogram",nodes="intermediate")
+```
 
 Also if we don't care about differences in branch lengths and we want to focus on differences in topology:
 ```r
