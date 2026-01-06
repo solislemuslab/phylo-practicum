@@ -142,6 +142,7 @@ p2
 
 <div style="text-align:center"><img src="../figures/figure1a.png" width="500"/></div>
 
+
 ## Reproducing Figure 1B
 
 This is almost the same code as in [Species tree via concatenation: 10Mb sliding window](https://solislemuslab.github.io/phylo-practicum/glemin-wheat/code/06-species-tree-supermatrix-10mb.html).
@@ -188,22 +189,13 @@ st<-root(st,"H_vulgare_HVens23",resolve.root = T)
 Finally, we plot the same density tree as Figure 1B:
 
 ```r
-densiTree(trees,consensus=st, scaleX=T,type='cladogram', alpha=0.1)
-ape::plot.phylo(st,
-     type = "cladogram",
-     add = TRUE,
-     plot = FALSE,
-     edge.color = "black",
-     edge.width = 2,
-     show.tip.label = FALSE)
+tree1ultra = chronos(tree1)
 
-
-library(ggtree)
-options(ignore.negative.edge = TRUE)
-
-
-ggtree(trees, alpha = 0.1) +
-  geom_tree2() +
-  geom_tree2(data = st, color = "black", size = 1.2)
-
+png(filename="../../../figures/figure1b.png", width = 1800, height = 900, units = "px")
+par(mfrow=c(1,2), mar = c(0.1, 0.1, 0.1, 0.1))
+plot(tree1ultra, show.tip.label = FALSE)
+densiTree(trees,consensus=tree1, direction='leftwards', scaleX=T,type='cladogram', alpha=0.1)
+dev.off()
 ```
+
+<div style="text-align:center"><img src="../figures/figure1b.png" width="700"/></div>

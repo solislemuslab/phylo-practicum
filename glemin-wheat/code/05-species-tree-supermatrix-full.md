@@ -69,3 +69,10 @@ plot(tre2)
 rtre2 = root(tre2,node = 51, resolve.root=TRUE)
 plot(ladderize(rtre2))
 ```
+
+We can also calculate the RF distance between our full concatenation tree and theirs:
+
+```r
+library(phangorn)
+RF.dist(tre,tre2) ## 0
+```
