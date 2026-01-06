@@ -44,6 +44,7 @@ Note that weighted ASTRAL has three modes (read more [here](https://github.com/c
 "Hybrid" mode combines both types of weights.
 Our gene trees do not have branch support, so we assume "hybrid" mode results in the same output as "mode=3" (branch length weighting). We could have explicitly added the flag `--mode 3`.
 
+The wastral command took around 45 minutes to finish in my computer.
 
 Now we can visualize it in R:
 ```r
