@@ -37,6 +37,9 @@ for(i in seq_along(gene_files)) {
   aln <- read.dna(gene_files[i], format = "fasta", as.character = TRUE)
   gene_len <- ncol(aln)
   
+  #ignore individuals with multiple sequences per gene
+  aln <- aln[!duplicated(rownames(aln)), ]
+  
   # Create a string of gaps for missing taxa
   gap_string <- paste(rep("-", gene_len), collapse = "")
   

@@ -18,7 +18,7 @@ $ ls | wc -l
 
 In the paper, the authors say:
 "Using the Hordeum genome as a reference, we also concatenated genes in 10-Mb windows along chromosomes, obtaining 298 alignments with at least three genes per window.
-[...]
+
 Among the 298 10-Mb trees, only 248 contained all individuals."
 
 We want to build one species tree per file, so we will use a similar bash script to the one for gene trees (`06-raxml-concatenation.sh`). This script has the flag `--threads 5` to use 5 threads within each raxml job.
@@ -32,7 +32,9 @@ There are 248 genes, each gene tree estimation took around 140 seconds in my com
 
 ### Making the 10Mb windows ourselves
 
-We will use the script `06-make-10Mb-windows.R` to create the 10Mb windows per chromosome.
+We can attempt to make the 10MB windows ourselves for analysis. We will use the script `06-make-10Mb-windows.R` to create the 10Mb windows per chromosome. This script uses the gene location mapping given by `MappedOnHordeumChromosomes_OneCopyGenes.txt`. This file maps each gene to a chromosome and a position on that chromosome. Then, for each chromosome, we start at position 1 and concatenate all genes in 10Mb windows. One thing worth noting here is that with our process, we generate 321 windows that have at least three genes in them. It is not clear how our window generation is different from the published generation.
+
+Also interestingly, when trying to concatenate genes, we found that 31 genes have multiple records per individual although the dataset are listed as single copy genes. This creates issues for concatenation and so we remove all individuals with multiple sequences for that gene.
 
 ### Visualization
 
