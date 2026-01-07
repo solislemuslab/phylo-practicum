@@ -31,33 +31,8 @@ plot(rtre)
 
 ## At the individual level
 
-We will use [Weighted ASTRAL](https://github.com/chaoszhang/ASTER/blob/master/tutorial/wastral.md) to reconstruct the species tree under the coalescent model. The input is the list of RAxML estimated gene trees with branch lengths: `04-all_gene_trees.tre`.
-
-We have to be in the `results/RAxML` path and run:
-```
-wastral -i 04-all_gene_trees.tre -o 07-individual-species-tree.tre
-```
-
-Note that weighted ASTRAL has three modes (read more [here](https://github.com/chaoszhang/ASTER/blob/master/tutorial/wastral.md)):
-1. Weighted ASTRAL by Branch Support (mode 2)
-2. Weighted ASTRAL by Branch Length (mode 3)
-3. Weighted ASTRAL - Hybrid (default)
-
-"Hybrid" mode combines both types of weights.
-Our gene trees do not have branch support, so we assume "hybrid" mode results in the same output as "mode=3" (branch length weighting). We could have explicitly added the flag `--mode 3`.
-
-The wastral command took around 45 minutes to finish in my computer.
-
-Now we can visualize it in R (in `results`):
-```r
-library(ape)
-tre = read.tree(file="07-individual-species-tree.tre")
-plot(tre)
-rtre = root(tre,outgroup="H_vulgare_HVens23", resolve.root=TRUE)
-plot(rtre)
-```
-
-**Extra:** The results did not make a lot of sense, so we will rerun with astral4.
+We will use [ASTRAL4](https://github.com/chaoszhang/ASTER/blob/master/tutorial/astral4.md) to reconstruct the species tree under the coalescent model. 
+The input is the list of RAxML estimated gene trees with branch lengths: `04-all_gene_trees.tre`.
 
 We have to be in the `results` path and run:
 ```
@@ -72,6 +47,16 @@ plot(tre)
 rtre = root(tre,outgroup="H_vulgare_HVens23", resolve.root=TRUE)
 plot(rtre)
 ```
+
+Note that we tried to run [Weighted ASTRAL](https://github.com/chaoszhang/ASTER/blob/master/tutorial/wastral.md) but the results were not good and we couldn't understand why. Those interested could run the command and compare the trees:
+
+```
+wastral -i 04-all_gene_trees.tre -o 07-individual-species-tree.tre
+```
+
+We will see that the individuals of the same species are not even monophyletic.
+
+
 
 ## At the species level
 
@@ -110,22 +95,6 @@ Now our mapping is saved as `07-species_mapping.txt`
 
 To make a species-level phylogeny, we just need to specify our mapping file in Weighted ASTRAL with the `-a` flag.
 
-In `results` folder:
-```
-wastral -i 04-all_gene_trees.tre -a 07-species_mapping.txt -o 07-species-tree.tre
-```
-
-Now we want to plot it in R (in `results`):
-```r
-library(ape)
-tre = read.tree(file="07-species-tree.tre")
-plot(tre)
-rtre = root(tre,outgroup="H_vulgare", resolve.root=TRUE)
-plot(rtre)
-```
-
-**Extra:** The results did not make a lot of sense, so we will rerun with astral4.
-
 We have to be in the `results` path and run:
 ```
 astral4 -i 04-all_gene_trees.tre -a 07-species_mapping.txt -o 07-species-tree-astral4.tre
@@ -139,3 +108,10 @@ plot(tre)
 rtre = root(tre,outgroup="H_vulgare", resolve.root=TRUE)
 plot(rtre)
 ```
+
+Again, the results from wASTRAL were not good, placing the outgroups within the ingroup clade. Those interested could run:
+```
+astral4 -i 04-all_gene_trees.tre -a 07-species_mapping.txt -o 07-species-tree.tre
+```
+and compare the trees.
+

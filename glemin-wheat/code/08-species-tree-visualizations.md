@@ -22,11 +22,11 @@ _Figure 1: (A) Phylogenetic tree of the Aegilops/Triticum genus. This same topol
 
 We will plot the two trees side by side.
 
-In `results/RAxML`:
+In `results`:
 ```r
 library(ape)
 
-tree1 = read.tree(file="full-concatenation/triticeae_allindividuals_OneCopyGenes.fasta.raxml.bestTree")
+tree1 = read.tree(file="RAxML/full-concatenation/triticeae_allindividuals_OneCopyGenes.fasta.raxml.bestTree")
 tree2 = read.tree(file="07-supertree.tre")
 
 tree1 = root(tree1,outgroup="H_vulgare_HVens23", resolve.root=TRUE)
@@ -200,20 +200,14 @@ dev.off()
 
 <div style="text-align:center"><img src="../figures/figure1b.png" width="700"/></div>
 
-## New coalescent-based species tree (wASTRAL)
+## New coalescent-based species tree (ASTRAL4)
 
-We now want to compare the original species tree with the new coalescent-based species tree we inferred with wASTRAL.
+We now want to compare the original species tree with the new coalescent-based species tree we inferred with ASTRAL4.
 
-First, we can calculate the RF distance:
-```r
-> RF.dist(tree1,tree3)
-[1] 86 ## not the same tree!
-```
-
-Then, we plot the individual level species tree along with the full concatenation tree (`tree1`):
+We plot the individual level species tree along with the full concatenation tree (`tree1`). In `results`:
 
 ```r
-tree3 = read.tree(file="07-individual-species-tree.tre")
+tree3 = read.tree(file="07-individual-species-tree-astral4.tre")
 tree3 = root(tree3,outgroup="H_vulgare_HVens23", resolve.root=TRUE)
 
 par(mfrow=c(1,2), mar = c(0.1, 0.1, 0.1, 0.1))
@@ -221,9 +215,15 @@ plot(tree1)
 plot(tree3)
 ```
 
-These trees do not look similar at all, but let's compare the species level tree `07-species-tree.tre`:
+First, we can calculate the RF distance:
 ```r
-tree4 = read.tree(file="07-species-tree.tre")
+> RF.dist(tree1,tree3)
+[1] 4 ## not the same tree!
+```
+
+These trees look very similar, but let's compare the species level tree `07-species-tree-astral4.tre`:
+```r
+tree4 = read.tree(file="07-species-tree-astral4.tre")
 tree4 = root(tree4,outgroup="H_vulgare", resolve.root=TRUE)
 
 par(mfrow=c(1,2), mar = c(0.1, 0.1, 0.1, 0.1))
@@ -231,15 +231,5 @@ plot(tree1)
 plot(tree4)
 ```
 
-## New coalescent-based species tree (ASTRAL4)
 
-Because we got such weird results with `wASTRAL`, we decided to run the analyses with `ASTRAL4`:
 
-```r
-tree5 = read.tree(file="07-species-tree-astral4.tre")
-tree5 = root(tree5,outgroup="H_vulgare", resolve.root=TRUE)
-
-par(mfrow=c(1,2), mar = c(0.1, 0.1, 0.1, 0.1))
-plot(tree1)
-plot(tree5)
-```
