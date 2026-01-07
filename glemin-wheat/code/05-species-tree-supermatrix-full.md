@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Species tree supermatrix (full)
+title: 05 Species tree supermatrix (full)
 parent: S26 Wheat
 nav_order: 3
 ---

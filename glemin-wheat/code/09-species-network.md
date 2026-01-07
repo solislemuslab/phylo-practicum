@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Species network
+title: 09 Species network
 parent: S26 Wheat
 nav_order: 7
 ---
@@ -28,6 +28,15 @@ rename!(mappingfile, :Column2 => :species)
 
 select!(mappingfile,[:species, :individual])
 
+## We want to remove 3 of the 4 outgroups to simplify the analysis:
+## We keep `H_vulgare_HVens23`, 
+## We remove `Ta_caputMedusae_TB2`, `Er_bonaepartis_TB1`, `S_vavilovii_Tr279`
+filter(row -> row.species in ["Ta_caputMedusae", "Er_bonaepartis", "S_vavilovii"], mappingfile)
+size(mappingfile) ## (47,2)
+
+mappingfile = filter(row -> !(row.species in ["Ta_caputMedusae", "Er_bonaepartis", "S_vavilovii"]), mappingfile)
+size(mappingfile) ## (44, 2)
+
 CSV.write("../results/09-species_mapping.csv", mappingfile)
 
 taxonmap = Dict(r[:individual] => r[:species] for r in eachrow(mappingfile)) # as dictionary
@@ -37,6 +46,8 @@ Now we read the gene trees and compute CF table:
 ```julia
 trees = readmultinewick("../results/04-all_gene_trees.tre")
 length(trees) ## 8708
+
+## [missing: we need to remove the 3 outgroups from all gene trees]
 
 ## creating CF table:
 df_sp = tablequartetCF(countquartetsintrees(trees, taxonmap; showprogressbar=false)...);

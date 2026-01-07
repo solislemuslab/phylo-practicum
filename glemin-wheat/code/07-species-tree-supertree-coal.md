@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Species tree supertree/coalescent
+title: 07 Species tree supertree/coalescent
 parent: S26 Wheat
 nav_order: 5
 ---
@@ -48,7 +48,7 @@ Our gene trees do not have branch support, so we assume "hybrid" mode results in
 
 The wastral command took around 45 minutes to finish in my computer.
 
-Now we can visualize it in R:
+Now we can visualize it in R (in `results`):
 ```r
 library(ape)
 tre = read.tree(file="07-individual-species-tree.tre")
@@ -92,7 +92,18 @@ writeLines(mapping, "../results/07-species_mapping.txt") ## write to file
 
 Now our mapping is saved as `07-species_mapping.txt`
 
-To make a species-level phylogeny, we just need to specify our mapping file in Weighted ASTRAL with the `-a` flag:
+To make a species-level phylogeny, we just need to specify our mapping file in Weighted ASTRAL with the `-a` flag.
+
+In `results` folder:
 ```
 wastral -i 04-all_gene_trees.tre -a 07-species_mapping.txt -o 07-species-tree.tre
+```
+
+Now we want to plot it in R (in `results`):
+```r
+library(ape)
+tre = read.tree(file="07-species-tree.tre")
+plot(tre)
+rtre = root(tre,outgroup="H_vulgare", resolve.root=TRUE)
+plot(rtre)
 ```

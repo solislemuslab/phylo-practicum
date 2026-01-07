@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Species tree visualizations
+title: 08 Species tree visualizations
 parent: S26 Wheat
 nav_order: 6
 ---
@@ -221,4 +221,12 @@ plot(tree1)
 plot(tree3)
 ```
 
-[add here plot for species level species tree wastral and compare to figure 1a]
+These trees do not look similar at all, but let's compare the species level tree `07-species-tree.tre`:
+```r
+tree4 = read.tree(file="07-species-tree.tre")
+tree4 = root(tree4,outgroup="H_vulgare", resolve.root=TRUE)
+
+par(mfrow=c(1,2), mar = c(0.1, 0.1, 0.1, 0.1))
+plot(tree1)
+plot(tree4)
+```

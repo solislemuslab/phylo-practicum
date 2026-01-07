@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Gene tree estimation
+title: 04 Gene tree estimation
 parent: S26 Wheat
 nav_order: 2
 ---
