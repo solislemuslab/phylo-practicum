@@ -34,9 +34,9 @@ We will reproduce the phylogenetic analyses of [Pervasive hybridizations in the 
 | 7 | 03/06 | Species tree: supertree and coalescent-based (new analysis) | | [notes](https://github.com/solislemuslab/phylo-practicum/glemin-wheat/code/07-species-tree-supetree-coal.html) | Finish the wASTRAL analyses |
 | 8 | 03/13 | Species tree results (Figure 1) | Install and read about [ggtree](https://yulab-smu.top/treedata-book/) | [notes](https://github.com/solislemuslab/phylo-practicum/glemin-wheat/code/08-species-tree-visualizations.html)
 | 9 | 03/20 | Species network inference (new analysis)
-| 10 | 03/27 | 
+| 10 | 03/27 | Hybrid tests: HyDe
 | 11 | 04/03 | Spring break
-| 12 | 04/10 | Hybrid tests: HyDe
+| 12 | 04/10 | 
 | 13 | 04/17 | Hybrid tests: MSCQuartets (new analysis)
 | 14 | 04/24 | Species network (Figure 5) and hybridization results (Figures 3-4)
 | 15 | 05/01 | Open question: other analyses

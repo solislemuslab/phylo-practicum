@@ -39,6 +39,7 @@ size(mappingfile) ## (44, 2)
 
 CSV.write("../results/09-species_mapping.csv", mappingfile)
 
+## mappingfile = CSV.read("../results/09-species_mapping.csv", DataFrame)
 taxonmap = Dict(r[:individual] => r[:species] for r in eachrow(mappingfile)) # as dictionary
 ```
 
@@ -47,24 +48,46 @@ Now we read the gene trees and compute CF table:
 trees = readmultinewick("../results/04-all_gene_trees.tre")
 length(trees) ## 8708
 
-## [missing: we need to remove the 3 outgroups from all gene trees]
+
+for gt in trees
+  for badtip in ["Ta_caputMedusae_TB2", "Er_bonaepartis_TB1", "S_vavilovii_Tr279"]
+    if badtip in tiplabels(gt)
+      deleteleaf!(gt, badtip)
+    end
+  end
+end
+
+
+writemultinewick(trees, "../results/09-all_gene_trees_snaq.tre")
+
+## trees = readmultinewick("../results/09-all_gene_trees_snaq.tre")
 
 ## creating CF table:
 df_sp = tablequartetCF(countquartetsintrees(trees, taxonmap; showprogressbar=false)...);
 keys(df_sp)  # columns names
 CSV.write("../results/09-tableCF_species.csv", df_sp); 
+
+```
+
+We want to open a Julia session with multithreads. So, we need to type in the terminal:
+```
+julia -t 2
+```
+
+And now inside Julia (in the `code` folder):
+
+```julia
+using Distributed
+addprocs(4)
+
+@everywhere using PhyloNetworks
+@everywhere using SNaQ
+
+## read table of CF
 d_sp = readtableCF("../results/09-tableCF_species.csv"); # "DataCF" object for use in snaq!
-```
-
-Last, we need to read the starting tree:
-```julia
 #read in the species tree from ASTRAL as a starting point
-T_sp = readnewick("../results/07-species-tree.tre")
+T_sp = readnewick("../results/07-species-tree-astral4.tre")
+
+net = snaq!(T_sp, d_sp, runs=100, Nfail=200, filename= "../results/09-snaq-h1",seed=8485);
 ```
 
-Now, we run snaq:
-```julia
-net = snaq!(T_sp, d_sp, nruns=45, Nfail=600, filename= "../results/09-snaq-h1");
-```
-
-[waiting to decide nruns, Nfail, threads and processors]
