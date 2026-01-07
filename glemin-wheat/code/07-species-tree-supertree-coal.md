@@ -57,6 +57,22 @@ rtre = root(tre,outgroup="H_vulgare_HVens23", resolve.root=TRUE)
 plot(rtre)
 ```
 
+**Extra:** The results did not make a lot of sense, so we will rerun with astral4.
+
+We have to be in the `results` path and run:
+```
+astral4 -i 04-all_gene_trees.tre -o 07-individual-species-tree-astral4.tre
+```
+
+Now we can visualize it in R (in `results`):
+```r
+library(ape)
+tre = read.tree(file="07-individual-species-tree-astral4.tre")
+plot(tre)
+rtre = root(tre,outgroup="H_vulgare_HVens23", resolve.root=TRUE)
+plot(rtre)
+```
+
 ## At the species level
 
 Since we have multiple individuals per species for some species, we can use the multispecies coalescent model to infer a species level phylogeny.
@@ -103,6 +119,22 @@ Now we want to plot it in R (in `results`):
 ```r
 library(ape)
 tre = read.tree(file="07-species-tree.tre")
+plot(tre)
+rtre = root(tre,outgroup="H_vulgare", resolve.root=TRUE)
+plot(rtre)
+```
+
+**Extra:** The results did not make a lot of sense, so we will rerun with astral4.
+
+We have to be in the `results` path and run:
+```
+astral4 -i 04-all_gene_trees.tre -a 07-species_mapping.txt -o 07-species-tree-astral4.tre
+```
+
+Now we want to plot it in R (in `results`):
+```r
+library(ape)
+tre = read.tree(file="07-species-tree-astral4.tre")
 plot(tre)
 rtre = root(tre,outgroup="H_vulgare", resolve.root=TRUE)
 plot(rtre)

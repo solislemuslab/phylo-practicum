@@ -24,7 +24,6 @@ By the end of the course, you will be able to
 
 ## Semesters offered
 
-- **Spring 2026:** Pervasive hybridizations in the history of wheat relatives by [Glemin et al, 2019](https://www.science.org/doi/10.1126/sciadv.aav9188). 
-    - Class notes [here](https://github.com/solislemuslab/phylo-practicum/tree/main/glemin-wheat).
+- **Spring 2026:** Pervasive hybridizations in the history of wheat relatives by [Glemin et al, 2019](https://www.science.org/doi/10.1126/sciadv.aav9188). Class notes [here](https://solislemuslab.github.io/phylo-practicum/glemin-wheat/).
 
 

@@ -230,3 +230,16 @@ par(mfrow=c(1,2), mar = c(0.1, 0.1, 0.1, 0.1))
 plot(tree1)
 plot(tree4)
 ```
+
+## New coalescent-based species tree (ASTRAL4)
+
+Because we got such weird results with `wASTRAL`, we decided to run the analyses with `ASTRAL4`:
+
+```r
+tree5 = read.tree(file="07-species-tree-astral4.tre")
+tree5 = root(tree5,outgroup="H_vulgare", resolve.root=TRUE)
+
+par(mfrow=c(1,2), mar = c(0.1, 0.1, 0.1, 0.1))
+plot(tree1)
+plot(tree5)
+```
