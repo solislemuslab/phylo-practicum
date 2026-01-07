@@ -74,9 +74,15 @@ mkdir ./results/HyDE/
 mkdir ./results/HyDe/10Mb-concatenation
 
 for file in "$DATADIR"/*; do
+	
+    # 1. Extract the filename from the path
+    filename=$(basename "$file")
+    
+    # 2. Remove the extension
+    base="${filename%.*}"
 
-    run_hyde.py -i ../data/Wheat_Relative_History_Data_Glemin_et_al/triticeae_allindividuals_OneCopyGenes.phylip -m 07-species_mapping.txt -o H_vulgare -n 47 -t
- 17 -s 11354214 --prefix 10-Hyde
+    run_hyde.py -i $file -m 07-species_mapping.txt -o H_vulgare -n 47 -t
+ 17 -s 11354214 -- prefix "./results/HyDe/10Mb-concatenation/${base}"
 
 
     raxml-ng --msa $file --model GTR+G4 --threads 5
