@@ -6,6 +6,8 @@ glemin-wheat/data/*
 glemin-wheat/results/*
 
 
+resources/*
+
 # Compiled source #
 ###################
 *.com
