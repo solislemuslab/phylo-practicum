@@ -11,7 +11,7 @@ In the original paper, the authors used 11,033 gene trees, but we only have 8739
 
 We had already installed `SuperTriplets_v1.1.jar` and you need to know the path where it is. Let's say that the path is `~/software/`, so we would run the command like:
 
-We need to be in the `results/RAxML`
+We need to be in the `results`
 ```
 java -jar ~/software/SuperTriplets_v1.1.jar 04-all_gene_trees.tre 07-supertree.tre
 ```
@@ -111,7 +111,7 @@ plot(rtre)
 
 Again, the results from wASTRAL were not good, placing the outgroups within the ingroup clade. Those interested could run:
 ```
-astral4 -i 04-all_gene_trees.tre -a 07-species_mapping.txt -o 07-species-tree.tre
+wastral -i 04-all_gene_trees.tre -a 07-species_mapping.txt -o 07-species-tree.tre
 ```
 and compare the trees.
 

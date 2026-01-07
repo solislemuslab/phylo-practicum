@@ -66,6 +66,8 @@ We will primarily be analyzing the inferred gene trees in R.
 
 First we want to read in each gene tree; for this we will primarily be focusing on the output file with the suffix `raxml.bestTree` which contains the maximum likelihood tree.
 
+In `results/RAxML`:
+
 ```r
 library(ape)
 library(phangorn)
@@ -230,6 +232,8 @@ This command will take around 9 hours to run.
 
 We can read the trees into R for similar visualizations (not shown).
 
+In `results/RAxML`:
+
 ```r
 library(ape)
 library(phangorn)
@@ -251,6 +255,6 @@ for(tree_file in tree_files){ ##go thru each file and read the tree
 Note that for the list of all gene trees we want to save them to file for future analyses:
 
 ```r
-write.tree(gene_trees, file="04-all_gene_trees.tre")
+write.tree(gene_trees, file="../04-all_gene_trees.tre")
 ```
 

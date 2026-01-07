@@ -7,12 +7,12 @@ nav_order: 6
 
 # Visualizing the species trees
 
-We have 4 estimated species trees (in `results/RAxML`):
+We have 4 estimated species trees (in `results`):
 
-- full concatenation (`full-concatenation/triticeae_allindividuals_OneCopyGenes.fasta.raxml.bestTree`)
-- consensus of 10Mb window concatenation trees (folder `10Mb-concatenation`)
+- full concatenation (`RAxML/full-concatenation/triticeae_allindividuals_OneCopyGenes.fasta.raxml.bestTree`)
+- consensus of 10Mb window concatenation trees (folder `RAxML/10Mb-concatenation`)
 - supertree (`07-supertree.tre`)
-- wASTRAL tree (`07-individual-species-tree.tre`)
+- ASTRAL4 tree (`07-individual-species-tree-astral4.tre`)
 
 ## Reproducing Figure 1A
 
