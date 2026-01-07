@@ -12,9 +12,9 @@ gene_map_loc <- "../data/Wheat_Relative_History_Data_Glemin_et_al/MappedOnHordeu
 gene_map <- read.table(gene_map_loc,header = T)
 mb10 <- 10000000 #10mb
 
-
 window_num<-1
 for(chromosome in unique(gene_map$Chrom)){
+
   chrom_genes<- gene_map[gene_map$Chrom==chromosome,] #get all genes on the chromosome
   chrom_len <- max(chrom_genes$Pos)
   

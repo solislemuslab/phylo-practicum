@@ -27,6 +27,15 @@ rtre = root(tre,outgroup="H_vulgare_HVens23", resolve.root=TRUE)
 plot(rtre)
 ```
 
+We can compare this tree with the more simple parsimony-based supertree that we constructed in `04-gene-trees`:
+
+```r
+gene_trees <- read.tree("04-all_gene_trees.tre")
+st_parsimony<-superTree(gene_trees)
+st_parsimony<-root(st,"H_vulgare_HVens23",resolve.root = T)
+plot(st_parsimony)
+```
+
 # Species tree via coalescent models
 
 ## At the individual level
