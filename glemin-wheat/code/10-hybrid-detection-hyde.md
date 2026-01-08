@@ -73,6 +73,16 @@ for window in all_windows :
 
 [Note the above code did not work for me, so alternative code in 10-fasta2phylip.py run from the terminal: python 10-fasta2phylip.py]
 
+In the paper, the authors run HyDe on all chromosomes, but that turns out to be too time-consuming, so we are only going to run on chromosom 3 (to reproduce Figure 3b).
+
+I am going to create another folder `10concatenation10Mb_OneCopy-phylip-ch3` and I will move all files corresponding to this chromosome there:
+
+In `results`:
+```
+mkdir 10concatenation10Mb_OneCopy-phylip-ch3
+mv 10concatenation10Mb_OneCopy-phylip/*Chrom_3* 10concatenation10Mb_OneCopy-phylip-ch3
+```
+
 Now we can run HyDe on each window with the bash script `10-hyde-10mb.sh`:
 
 In `code`:
