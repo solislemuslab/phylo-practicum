@@ -44,6 +44,14 @@ run_hyde.py -i ../results/10-triticeae_allindividuals_OneCopyGenes.phylip -m ../
 
 Note that in order to read the data, we needed to provide a little extra information. Specifically, we needed to provide the outgroup (H_vulgare), number of individuals sampled (47), number of species (17), and number of sites (11354214).
 
+This command took like an hour to run.
+
+We want to move the results to the `results` folder:
+```
+mv 10-hyde-out-filtered.txt ../results
+mv 10-hyde-out.txt ../results
+```
+
 ## Running HyDe on 10MB windows
 
 Similarly to how we ran RAxML on each of the 10MB windows, we can use a bash script to run HyDe on each window. However, we first need to convert all the windows to the appropriate format.
