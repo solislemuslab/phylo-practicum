@@ -7,6 +7,8 @@ nav_order: 7
 
 # Species network
 
+## Creating input files
+
 We have the estimated gene trees (`04-all-gene-trees.tre`) and the mapping of individuals to species (`07-species_mapping.txt`). We want to run [SNaQ](https://juliaphylo.github.io/SNaQ.jl/stable/man/multiplealleles/) on multiple alleles to estimate the species network at species level (13 wheat species and 4 outgroups).
 
 We also have a starting species tree at species level (`07-species-tree.tre`).
@@ -69,6 +71,10 @@ CSV.write("../results/09-tableCF_species.csv", df_sp);
 
 ```
 
+## Running SNaQ to infer phylogenetic network
+
+First, we want to create a subfolder `snaq` in `results.
+
 We want to open a Julia session with multithreads. So, we need to type in the terminal:
 ```
 julia -t 2
@@ -88,6 +94,6 @@ d_sp = readtableCF("../results/09-tableCF_species.csv"); # "DataCF" object for u
 #read in the species tree from ASTRAL as a starting point
 T_sp = readnewick("../results/07-species-tree-astral4.tre")
 
-net = snaq!(T_sp, d_sp, runs=100, Nfail=200, filename= "../results/09-snaq-h1",seed=8485);
+net = snaq!(T_sp, d_sp, runs=100, Nfail=200, filename= "../results/snaq/09-snaq-h1",seed=8485);
 ```
 
