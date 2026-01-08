@@ -36,9 +36,9 @@ We will reproduce the phylogenetic analyses of [Pervasive hybridizations in the 
 | 9 | 03/20 | Species network inference (new analysis)
 | 10 | 03/27 | Hybrid tests: HyDe
 | 11 | 04/03 | Spring break
-| 12 | 04/10 | 
-| 13 | 04/17 | Hybrid tests: MSCQuartets (new analysis)
-| 14 | 04/24 | Species network (Figure 5) and hybridization results (Figures 3-4)
+| 12 | 04/10 | HyDe visualizations (Figures 3-4)
+| 13 | 04/17 | Hybrid tests: MSCQuartets and visualizations
+| 14 | 04/24 | Species network visualization (Figure 5) 
 | 15 | 05/01 | Open question: other analyses
 | 16 | 05/04 | Final reproducible script due
 
