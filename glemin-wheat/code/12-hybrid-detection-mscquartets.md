@@ -2,7 +2,7 @@
 layout: default
 title: 11 Hybrid detection with MSCQuartets
 parent: S26 Wheat
-nav_order: 9
+nav_order: 10
 ---
 
 # Hybrid detection with MSCQuartets
@@ -22,5 +22,5 @@ RQT=quartetTableResolved(QT)
 pTable3=quartetTreeTestInd(RQT,"T3")
 quartetTablePrint(pTable3[1:6,])
 
-write.csv(pTable3, "11-mscquartets-ptable.csv")
+write.csv(pTable3, "12-mscquartets-ptable.csv")
 ```

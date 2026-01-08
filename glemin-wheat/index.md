@@ -33,14 +33,14 @@ We will reproduce the phylogenetic analyses of [Pervasive hybridizations in the 
 | 6 | 02/27 | Species tree: supermatrix (10Mb sliding window) | | [notes](https://github.com/solislemuslab/phylo-practicum/glemin-wheat/code/06-species-tree-supermatrix-10mb.html) | Finish the RAxML analyses on your own and visualize the results; Optional: run the script to create the 10Mb windows yourself |
 | 7 | 03/06 | Species tree: supertree and coalescent-based (new analysis) | | [notes](https://github.com/solislemuslab/phylo-practicum/glemin-wheat/code/07-species-tree-supetree-coal.html) | Finish the wASTRAL analyses |
 | 8 | 03/13 | Species tree results (Figure 1) | Install and read about [ggtree](https://yulab-smu.top/treedata-book/) | [notes](https://github.com/solislemuslab/phylo-practicum/glemin-wheat/code/08-species-tree-visualizations.html)
-| 9 | 03/20 | Species network inference (new analysis)
-| 10 | 03/27 | Hybrid tests: HyDe
-| 11 | 04/03 | Spring break
-| 12 | 04/10 | HyDe visualizations (Figures 3-4)
-| 13 | 04/17 | Hybrid tests: MSCQuartets and visualizations
-| 14 | 04/24 | Species network visualization (Figure 5) 
-| 15 | 05/01 | Open question: other analyses
-| 16 | 05/04 | Final reproducible script due
+| 9 | 03/20 | Species network inference (new analysis) | | [notes](https://github.com/solislemuslab/phylo-practicum/glemin-wheat/code/09-species-network.html) | Leave the snaq job running in the background | 
+| 10 | 03/27 | Hybrid tests: HyDe | | [notes](https://github.com/solislemuslab/phylo-practicum/glemin-wheat/code/10-hybrid-detection-hyde.html) | Leave HyDe analyses for 10Mb windows running in the background |
+|  | 04/03 | Spring break
+| 11 | 04/10 | HyDe visualizations (Figures 3-4)
+| 12 | 04/17 | Hybrid tests: MSCQuartets and visualizations | | [notes](https://github.com/solislemuslab/phylo-practicum/glemin-wheat/code/12-hybrid-detection-mscquartets.html) 
+| 13 | 04/24 | Species network visualization (Figure 5) 
+| 14 | 05/01 | Open question: other analyses
+|  | 05/04 | Final reproducible script due
 
 
 ### More details

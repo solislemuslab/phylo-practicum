@@ -96,4 +96,4 @@ T_sp = readnewick("../results/07-species-tree-astral4.tre")
 
 net = snaq!(T_sp, d_sp, runs=100, Nfail=200, filename= "../results/snaq/09-snaq-h1",seed=8485);
 ```
-
+Note that this command will take several days to run, so we should leave it running somewhere in the background.
