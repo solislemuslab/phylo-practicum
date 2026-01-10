@@ -108,6 +108,7 @@ from run number 85
 And we can plot with:
 ```julia
 using PhyloPlots
+# net = readnewick("(Ae_sharonensis,Ae_longissima,(Ae_bicornis,(Ae_searsii,((Ae_tauschii,(((Ae_uniaristata,Ae_comosa)1:0.4918206502664954,(Ae_caudata,Ae_umbellulata)1:0.13449338165653227)1:0.00911821493436927,((T_boeoticum,T_urartu)1:1.6460105085783057,(H_vulgare,((Ae_speltoides,Ae_mutica)1:0.07124470208266999)#H26:0.14159810198824307::0.7563186990617421)1:0.1869824746969994)1:0.46325640725730144)0.99651:0.06048455134529327):0.16788568790821257,#H26:0.0::0.2436813009382579):0.45932787904385297)1:0.9296082436533977)1:0.5926597507029276)1;")
 plot(net, showedgenumber=true)
 ```
 
