@@ -75,12 +75,12 @@ CSV.write("../results/09-tableCF_species.csv", df_sp);
 
 First, we want to create a subfolder `snaq` in `results.
 
-We want to open a Julia session with multithreads. So, we need to type in the terminal:
+We want to open a Julia session with multithreads. So, we need to type in the terminal (in the `code` folder):
 ```
 julia -t 2
 ```
 
-And now inside Julia (in the `code` folder):
+And now inside Julia:
 
 ```julia
 using Distributed
@@ -97,3 +97,28 @@ T_sp = readnewick("../results/07-species-tree-astral4.tre")
 net = snaq!(T_sp, d_sp, runs=100, Nfail=200, filename= "../results/snaq/09-snaq-h1",seed=8485);
 ```
 Note that this command will take several days to run, so we should leave it running somewhere in the background.
+
+We get:
+```
+MaxNet is (Ae_sharonensis,Ae_longissima,(Ae_bicornis,(Ae_searsii,((Ae_tauschii,(((Ae_uniaristata,Ae_comosa)1:0.4918206502664954,(Ae_caudata,Ae_umbellulata)1:0.13449338165653227)1:0.00911821493436927,((T_boeoticum,T_urartu)1:1.6460105085783057,(H_vulgare,((Ae_speltoides,Ae_mutica)1:0.07124470208266999)#H26:0.14159810198824307::0.7563186990617421)1:0.1869824746969994)1:0.46325640725730144)0.99651:0.06048455134529327):0.16788568790821257,#H26:0.0::0.2436813009382579):0.45932787904385297)1:0.9296082436533977)1:0.5926597507029276)1; 
+with -loglik 201.8386327450107 
+from run number 85
+```
+
+And we can plot with:
+```julia
+using PhyloPlots
+plot(net, showedgenumber=true)
+```
+
+We want to root on the outgroup:
+```julia
+rootonedge!(net, 21)
+plot(net, showgamma=true)
+```
+
+Note that the backbone tree (the major tree) matches the one estimated by full concatenation and astral. To compare to Figure 5, we need to consider the following two clades:
+- _Comopyrum_ clade includes Aegilops comosa and Aegilops uniaristata.
+- _Sitopsis_ clade includes Aegilops bicornis, Aegilops longissima, Aegilops searsii, and Aegilops sharonensis.
+
+SNaQ network finds a hybridization from the ancestor of Sitopsis into the ancestor of Ae mutica and Ae speltoides which does not appear in Figure 5. The closest is hybridization 3.
