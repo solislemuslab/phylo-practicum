@@ -71,7 +71,7 @@ for window in all_windows :
 	count = SeqIO.write(records, window_phylip_path+window, "phylip-relaxed")
 ```
 
-[Note the above code did not work for me, so alternative code in 10-fasta2phylip.py run from the terminal: python 10-fasta2phylip.py]
+Note the above code did not work for me, so alternative code in 10-fasta2phylip.py run from the terminal: `python 10-fasta2phylip.py`.
 
 In the paper, the authors run HyDe on all chromosomes, but that turns out to be too time-consuming, so we are only going to run on chromosom 3 (to reproduce Figure 3b).
 

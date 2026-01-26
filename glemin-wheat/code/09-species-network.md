@@ -114,7 +114,10 @@ plot(net, showedgenumber=true)
 
 We want to root on the outgroup:
 ```julia
-rootonedge!(net, 21)
+rootonedge!(net, 16)
+rotate!(net,22)
+rotate!(net,23)
+rotate!(net,-6)
 plot(net, showgamma=true)
 ```
 
