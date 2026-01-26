@@ -7,9 +7,9 @@ nav_order: 1
 
 # Cloning the class repository
 
-Most class materials are accessible from the [course repository](https://github.com/solislemuslab/phylo-practicum/tree/main). If you have [Git](https://git-scm.com/) downloaded, you can clone this repo with the command `git https://github.com/solislemuslab/phylo-practicum/tree/main`. 
+Most class materials are accessible from the [course repository](https://github.com/solislemuslab/phylo-practicum/tree/main). If you have [git](https://git-scm.com/) downloaded, you can clone this repo with the command `git clone https://github.com/solislemuslab/phylo-practicum/tree/main`. 
 
-Specifically, there is a folder called `glemin-wheat` that we will be using for this course. This folder contains all scripts nessecary to recreate the analyses of [Glemin et al (2019)](https://www.science.org/doi/10.1126/sciadv.aav9188). These scripts assume the specific directory structure that is already set up in this repo. While we encourage students to use this structure, you can organize your files however makes the most sense for you, but be noted that some scripts may need to be altered accordingly. The structure we use is:
+Specifically, there is a folder called `glemin-wheat` that we will be using for this course. This folder contains all scripts necessary to recreate the analyses of [Glemin et al (2019)](https://www.science.org/doi/10.1126/sciadv.aav9188). These scripts assume the specific directory structure that is already set up in this repo. While we encourage students to use this structure, you can organize your files however makes the most sense for you, but be noted that some scripts may need to be altered accordingly. The structure we use is:
 ```
 glemin-wheat/
 ├── index.md            <-- Contains an Overview of the contents
@@ -17,7 +17,7 @@ glemin-wheat/
 │   ├── Wheat_Relative_History_Data_Glemin_et_al/   Folder that will contain the wheat data.
 │   │	├── README.txt     <-- Describes the downloadable data from the paper
 ├── code/                  <-- Scripts and bash files to run the analyses.
-│	├── Y-XXXXX.md     <-- Markdown for class number Y on how to run XXXXX analyses
+│ ├── Y-XXXXX.md     <-- Markdown for class number Y on how to run XXXXX analyses
 | ├── Y-ZZZZZ.sh     <-- Bash script for class number Y to run analysis ZZZZZ
 ├── results/               <-- This folder will contain the results generated for each analysis
 
