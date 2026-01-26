@@ -34,11 +34,11 @@ We will reproduce the phylogenetic analyses of [Pervasive hybridizations in the 
 | 6 | 03/06 | Species tree: supermatrix (10Mb sliding window) | | [notes](https://solislemuslab.github.io/phylo-practicum/glemin-wheat/code/06-species-tree-supermatrix-10mb.html) | Finish the RAxML analyses on your own and visualize the results; Optional: run the script to create the 10Mb windows yourself |
 | 7 | 03/13 | Species tree: supertree and coalescent-based (new analysis) | | [notes](https://solislemuslab.github.io/phylo-practicum/glemin-wheat/code/07-species-tree-supertree-coal.html) | Finish the ASTRAL analyses |
 | 8 | 03/20 | Species tree results (Figure 1) | Install and read about [ggtree](https://yulab-smu.top/treedata-book/) | [notes](https://solislemuslab.github.io/phylo-practicum/glemin-wheat/code/08-species-tree-visualizations.html)
-| 9 | 03/27 | Species network inference (new analysis) | | [notes](https://solislemuslab.github.io/phylo-practicum/glemin-wheat/code/09-species-network.html) | Leave the snaq job running in the background | 
+| 9 | 03/27 | Species network inference (new analysis + Figure 5) | | [notes](https://solislemuslab.github.io/phylo-practicum/glemin-wheat/code/09-species-network.html) | Leave the snaq job running in the background | 
 |  | 04/03 | Spring break
 | 10 | 04/10 | Hybrid tests: HyDe | | [notes](https://solislemuslab.github.io/phylo-practicum/glemin-wheat/code/10-hybrid-detection-hyde.html) | Leave HyDe analyses for 10Mb windows running in the background |
 | 11 | 04/17 | Hybrid tests: MSCQuartets and visualizations (Figures 3-4) | | [notes](https://solislemuslab.github.io/phylo-practicum/glemin-wheat/code/11-hybrid-detection-mscquartets.html) 
-| 12 | 04/24 | Species network visualization (Figure 5) 
+| 12 | 04/24 | Interpreting hybridization results 
 | 13 | 05/01 | Open question: other analyses
 |  | 05/04 | Final reproducible script due
 
