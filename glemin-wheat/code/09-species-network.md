@@ -118,6 +118,8 @@ rootonedge!(net, 16)
 rotate!(net,22)
 rotate!(net,23)
 rotate!(net,-6)
+rotate!(net,12)
+rotate!(net,11)
 plot(net, showgamma=true)
 ```
 
@@ -126,3 +128,40 @@ Note that the backbone tree (the major tree) matches the one estimated by full c
 - _Sitopsis_ clade includes Aegilops bicornis, Aegilops longissima, Aegilops searsii, and Aegilops sharonensis.
 
 SNaQ network finds a hybridization from the ancestor of Sitopsis into the ancestor of Ae mutica and Ae speltoides which does not appear in Figure 5. The closest is hybridization 3.
+
+Let's try to use the same colors as in Figure 5:
+
+```julia
+using DataFrames
+
+tipnodes = [n.number for n in net.node if n.leaf]
+tipnames = [n.name for n in net.node if n.leaf]
+
+tipcolors = Dict(
+    "T_urartu" => "darkolivegreen",
+    "T_boeoticum" => "darkolivegreen",
+    "Ae_comosa" => "chocolate",
+    "Ae_uniaristata" => "chocolate",
+    "Ae_caudata" => "khaki",
+    "Ae_umbellulata" => "gold",
+    "Ae_tauschii" => "red",
+    "Ae_longissima" => "mediumorchid",
+    "Ae_sharonensis" => "mediumorchid",
+    "Ae_bicornis" => "mediumorchid",
+    "Ae_searsii" => "mediumorchid",
+    "Ae_mutica" => "dodgerblue",
+    "Ae_speltoides" => "navy"
+)
+
+colors = [get(tipcolors, name, "black") for name in tipnames]
+
+nodelabel = DataFrame(
+    number = tipnodes,
+    label = tipnames,
+    nodelabelcolor = colors
+)
+
+plot(net, nodelabel = nodelabel)
+```
+
+[Note this still does not work]
