@@ -2,7 +2,7 @@
 layout: default
 title: 07 Species tree supertree/coalescent
 parent: S26 Wheat
-nav_order: 5
+nav_order: 6
 ---
 
 # Species tree via supertree

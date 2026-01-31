@@ -2,7 +2,7 @@
 layout: default
 title: 08 Species tree visualizations
 parent: S26 Wheat
-nav_order: 6
+nav_order: 7
 ---
 
 # Visualizing the species trees

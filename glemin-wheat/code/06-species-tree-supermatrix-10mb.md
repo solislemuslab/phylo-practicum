@@ -2,7 +2,7 @@
 layout: default
 title: 06 Species tree supermatrix (10Mb)
 parent: S26 Wheat
-nav_order: 4
+nav_order: 5
 ---
 
 # Species tree via concatenation: 10Mb sliding window

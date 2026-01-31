@@ -2,7 +2,7 @@
 layout: default
 title: 10 Hybrid detection with HyDe
 parent: S26 Wheat
-nav_order: 8
+nav_order: 9
 ---
 
 # Hybrid detection with HyDe

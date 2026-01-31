@@ -2,7 +2,7 @@
 layout: default
 title: 04 Gene tree estimation
 parent: S26 Wheat
-nav_order: 2
+nav_order: 3
 ---
 
 # Gene Trees

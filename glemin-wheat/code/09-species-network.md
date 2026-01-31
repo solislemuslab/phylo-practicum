@@ -2,7 +2,7 @@
 layout: default
 title: 09 Species network
 parent: S26 Wheat
-nav_order: 7
+nav_order: 8
 ---
 
 # Species network

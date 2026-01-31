@@ -2,7 +2,7 @@
 layout: default
 title: 03 Data and Softwate Setup
 parent: S26 Wheat
-nav_order: 1
+nav_order: 2
 ---
 
 # Cloning the class repository
