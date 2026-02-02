@@ -27,7 +27,7 @@ We will reproduce the phylogenetic analyses of [Pervasive hybridizations in the 
 | :---: | :---:   | :---: | :---:         | :---: | :---: | 
 | 0 | 01/23 | Canceled due to extreme cold weather
 | 1 | 01/30 | Introduction and reproducibility practices | | [notes](https://solislemuslab.github.io/phylo-practicum/notes/1-intro-reproducibility.html) | Set-up local folder for the class ([HW](https://github.com/solislemuslab/phylo-practicum/blob/main/notes/1-intro-reproducibility.md#homework)) |
-| 2 | 02/06 | Paper discussion | Read [Glemin et al, 2019](https://www.science.org/doi/10.1126/sciadv.aav9188); Optional reading [Marcussen et al, 2014](https://www.science.org/doi/full/10.1126/science.1250092)
+| 2 | 02/06 | Paper discussion | Read [Glemin et al, 2019](https://www.science.org/doi/10.1126/sciadv.aav9188); Optional reading [Marcussen et al, 2014](https://www.science.org/doi/full/10.1126/science.1250092) | | [notes](https://solislemuslab.github.io/phylo-practicum/glemin-wheat/code/02-paper-discussion.html)
 | 3 | 02/13 | Goal of the analyses, required software and data | | [notes](https://solislemuslab.github.io/phylo-practicum/glemin-wheat/code/03-data-software.html) | Make sure all software is properly installed in your computer |
 | 4 | 02/20 |Gene tree inference | | [notes](https://solislemuslab.github.io/phylo-practicum/glemin-wheat/code/04-gene-trees.html) | Run RAxML on all genes |
 | 5 | 02/27 | Species tree: supermatrix (full concatenation) | | [notes](https://solislemuslab.github.io/phylo-practicum/glemin-wheat/code/05-species-tree-supermatrix-full.html) | Finish the RAxML analyses on your own and visualize the results; Optional: run the script to concatenate genes yourself |
