@@ -78,11 +78,13 @@ Note that if you copied your executable on your PATH, you will need to choose "o
 
 Confirm that you can run RAxML by typing `raxml-ng` in the terminal.
 
+Some people might need to do `chmod +x raxml-ng` to make the file an executable. Some newer Mac computers will also think it is malware, so you need to go to Settings and Privacy and Security to allow opening this file.
 
 ### For Windows 
 
 This will need to be built in the Windows Subsystem for Linux. First, download the Linux binary for [RAxML-ng](https://github.com/amkozlov/raxml-ng/releases/download/1.2.2/raxml-ng_v1.2.2_linux_x86_64.zip). Extract the contents from this folder and you will find an executable file named `raxml-ng`, either add the location of raxml-ng to your `PATH` or move the file to a location already in your `PATH`. Now from the WSL, you can confirm you have installed RAxML with the command `raxml-ng -h`.
 
+Some people might need to do `chmod +x raxml-ng` to make the file an executable.
 
 ## 2. SuperTriplets
 
