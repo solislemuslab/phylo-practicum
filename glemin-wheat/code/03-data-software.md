@@ -196,8 +196,7 @@ pipx install phyde
 
 Alternatively, to install natively on Windows (not recommended), you will need 
 a the Microsoft Visual C++ compiler that is at least version 14.0; that can be downloaded [here]( https://visualstudio.microsoft.com/visual-cpp-build-tools/
-). When going thru the installer, select "Desktop Development with C++". Alternatively, if you downloaded Python for the WSL and want HyDe on the WSL, you can follow the download instructions using any C++ compiler.
-
+). When going thru the installer, select "Desktop Development with C++".
 
 You can confirm installation by running `run_hyde.py`.
 
