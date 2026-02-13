@@ -183,12 +183,23 @@ python3 -m pip install .
 
 **Note for Mac users** that I had updated XCode, but did not agree to the new license, so I was getting weird errors because of that.
 
-**Note for Windows users:** You will need 
+**Note for Windows users:** I recommend downloading Python and installing HyDe from the WSL. HyDe can be built natively in Windows but requires Visual C++ which is bulky (see below). Most WSL distributions come with Python already installed, you can confirm this by typing `python3 --version`. You will additionally need `pipx` to globally install HyDe:
+To install in the WSL, :
+```
+sudo apt install pipx
+```
+
+From here you can install Hyde from PyPI with the command:
+``` 
+pipx install phyde
+```
+
+Alternatively, to install natively on Windows (not recommended), you will need 
 a the Microsoft Visual C++ compiler that is at least version 14.0; that can be downloaded [here]( https://visualstudio.microsoft.com/visual-cpp-build-tools/
 ). When going thru the installer, select "Desktop Development with C++". Alternatively, if you downloaded Python for the WSL and want HyDe on the WSL, you can follow the download instructions using any C++ compiler.
 
 
-You can confirm installation by running `make test`.
+You can confirm installation by running `run_hyde.py`.
 
 ## 6. R
 
