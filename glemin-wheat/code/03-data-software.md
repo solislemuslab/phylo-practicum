@@ -184,7 +184,6 @@ python3 -m pip install .
 **Note for Mac users** that I had updated XCode, but did not agree to the new license, so I was getting weird errors because of that.
 
 **Note for Windows users:** I recommend downloading Python and installing HyDe from the WSL. HyDe can be built natively in Windows but requires Visual C++ which is bulky (see below). Most WSL distributions come with Python already installed, you can confirm this by typing `python3 --version`. You will additionally need `pipx` to globally install HyDe:
-To install in the WSL, :
 ```
 sudo apt install pipx
 ```
