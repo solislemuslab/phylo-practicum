@@ -39,9 +39,6 @@ For this command, you need to be in the `code` folder:
 ```
 run_hyde.py -i ../results/10-triticeae_allindividuals_OneCopyGenes.phylip -m ../results/07-species_mapping.txt -o H_vulgare -n 47 -t 17 -s 11354214 --prefix 10-hyde
 ```
-
-[Josh, Figure out what is going on with run_hyde.py on your computer]
-
 Note that in order to read the data, we needed to provide a little extra information. Specifically, we needed to provide the outgroup (H_vulgare), number of individuals sampled (47), number of species (17), and number of sites (11354214).
 
 This command took like an hour to run.
