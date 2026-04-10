@@ -17,15 +17,26 @@ HyDe needs the sequence data in `Phylip` format, however, our sequences are in `
 If BioPython is not installed you can run the command `pip3 install BioPython` in the terminal.
 
 ```python
-from Bio import SeqIO
+from Bio import AlignIO
+from Bio.AlignIO.PhylipIO import SequentialPhylipWriter
 
-#read in the fasta format sequence
 data_path = "../data/Wheat_Relative_History_Data_Glemin_et_al/"
 concat_file = "triticeae_allindividuals_OneCopyGenes.fasta"
-records = SeqIO.parse(data_path+concat_file, "fasta")
 
-#convert the output to phylip
-count = SeqIO.write(records, "../results/10-triticeae_allindividuals_OneCopyGenes.phylip", "phylip-relaxed")
+fasta_file = data_path+concat_file
+phylip_file = "../results/10-triticeae_allindividuals_OneCopyGenes.phylip"
+
+# Load the alignment
+with open(fasta_file, "r") as f_in:
+    alignment = AlignIO.read(f_in, "fasta")
+
+# Find the length of the longest sequence ID to prevent truncation
+max_id_len = max(len(record.id) for record in alignment)
+
+# Write out the alignment
+with open(phylip_file, "w") as f_out:
+    writer = SequentialPhylipWriter(f_out)
+    writer.write_alignment(alignment, id_width=max_id_len + 3) # 3 additional padding
 ```
 
 Additionally we need a mapping file that maps individuals to their respective species. When performing our coalescent analysis, we created the mapping file `07-species-mapping.txt` which is in the exact format that we need.
