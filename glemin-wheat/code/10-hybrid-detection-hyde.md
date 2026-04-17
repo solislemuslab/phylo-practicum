@@ -67,7 +67,8 @@ Similarly to how we ran RAxML on each of the 10MB windows, we can use a bash scr
 In `code`, we open `python`:
 ```python
 import os
-from Bio import SeqIO
+from Bio import AlignIO
+from Bio.AlignIO.PhylipIO import SequentialPhylipWriter
 
 window_phylip_path = "../results/10concatenation10Mb_OneCopy-phylip/" 
 os.makedirs(window_phylip_path,exist_ok=True)
@@ -75,8 +76,18 @@ window_path = "../data/Wheat_Relative_History_Data_Glemin_et_al/Concatenation10M
 all_windows = os.listdir(window_path)
 
 for window in all_windows :
-	records = SeqIO.parse(window_path+window, "fasta")
-	count = SeqIO.write(records, window_phylip_path+window, "phylip-relaxed")
+	with open(window, "r") as f_in:
+		alignment = AlignIO.read(f_in, "fasta")
+
+	phylip_file = window_phylip_path+window.removesuffix(".fasta")+".phylip
+
+	# Find the length of the longest sequence ID to prevent truncation
+	max_id_len = max(len(record.id) for record in alignment)
+
+	# Write out the alignment
+	with open(phylip_file, "w") as f_out:
+		writer = SequentialPhylipWriter(f_out)
+		writer.write_alignment(alignment, id_width=max_id_len + 3) # 3 additional padding
 ```
 
 Note the above code did not work for me, so alternative code in 10-fasta2phylip.py run from the terminal: `python 10-fasta2phylip.py`.
