@@ -38,7 +38,7 @@ We will reproduce the phylogenetic analyses of [Pervasive hybridizations in the 
 |  | 04/03 | Spring break
 | 10 | 04/10 | Hybrid tests: HyDe | | [notes](https://solislemuslab.github.io/phylo-practicum/glemin-wheat/code/10-hybrid-detection-hyde.html) | Leave HyDe analyses for 10Mb windows running in the background |
 | 11 | 04/17 | Hybrid tests: MSCQuartets and visualizations (Figures 3-4) | | [notes](https://solislemuslab.github.io/phylo-practicum/glemin-wheat/code/11-hybrid-detection-mscquartets.html) 
-| 12 | 04/24 | Interpreting hybridization results 
+| 12 | 04/24 | Interpreting hybridization results | | [notes](https://solislemuslab.github.io/phylo-practicum/glemin-wheat/code/12-hybridization-discussion.html)
 | 13 | 05/01 | Open question: other analyses
 |  | 05/04 | Final reproducible script due
 

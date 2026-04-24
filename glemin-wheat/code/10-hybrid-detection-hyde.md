@@ -79,7 +79,7 @@ for window in all_windows :
 	with open(window_path+window, "r") as f_in:
 		alignment = AlignIO.read(f_in, "fasta")
 
-	phylip_file = window_phylip_path+window.removesuffix(".fasta")+".phylip
+	phylip_file = window_phylip_path+window.removesuffix(".fasta")+".phylip"
 
 	# Find the length of the longest sequence ID to prevent truncation
 	max_id_len = max(len(record.id) for record in alignment)
