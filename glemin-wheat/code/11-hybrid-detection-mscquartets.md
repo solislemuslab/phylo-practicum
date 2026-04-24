@@ -5,6 +5,162 @@ parent: S26 Wheat
 nav_order: 10
 ---
 
+
+# Reproducing Figure 3A and 3B
+
+In `results`, we have the HyDe output files per position in chromosome 3. We want to extract the triplets were _Ae mutica, Ae speltoides, T boeoticum, T urartu_ are parents and the hybrid belongs to D clade (_Ae bicornis, Ae longissima, Ae sharonensis, Ae searsii, Ae tauschii, Ae caudata, Ae umbellilata, Ae comosa, Ae uniaristata_). 
+
+
+In `results/HyDe/10Mb-concatenation-ch3`:
+```r
+library(dplyr)
+library(purrr)
+library(ggplot2)
+
+parents1 = c("Ae_mutica", "Ae_speltoides")## B Clade
+parents2 = c("T_boeoticum", "T_urartu") #A Clade
+hybrids = c("Ae_bicornis", "Ae_longissima", "Ae_sharonensis", "Ae_searsii", "Ae_tauschii", "Ae_caudata", "Ae_umbellulata", "Ae_comosa", "Ae_uniaristata") # D clade
+
+
+
+hyde_chrom_dir <-"../results/HyDe/10Mb-concatenation-ch3/"
+chrom_files<-list.files(hyde_chrom_dir,pattern='out.txt')
+
+all_hyde <-list()
+for(chrom_file in chrom_files){ # go thru all positions on Chromosome 3
+  hyde_file<-paste(hyde_chrom_dir,chrom_file,sep='')
+  hyde_result <-read.table(hyde_file,header = T)
+
+  chrom_pos <- sub(".*_(\\d+)-out\\.txt", "\\1", chrom_file)
+  
+  filtered_results <- hyde_result %>%
+    filter(Hybrid %in% hybrids) %>% #get the rows with hybrid species as the hybrid
+    filter( #specify the parents
+      (P1 %in% parents1 & P2 %in% parents2) | 
+        (P1 %in% parents2 & P2 %in% parents1)
+    )  %>%
+    mutate(P1_signal = ABBA,
+           P2_signal = AABB,
+           P12_signal= ABAB)
+    if(nrow(filtered_results)==0){
+      next
+    }
+  
+  all_hyde[[chrom_pos]]<-filtered_results
+}
+all_hyde <- bind_rows(all_hyde,.id='pos') #combine results into a single data frame
+```
+
+For Figure 3B, we only want the Ae. Mutica Species from the B clade. This way we can check the hybrid index of D species that come from Ae. Mutica.
+
+```r
+mutica <- all_hyde %>% 
+  filter((P1 %in% "Ae_mutica") | (P2 %in% "Ae_mutica"))  %>%
+  mutate(B_signal = ifelse(P1 %in% parents1, P1_signal , P2_signal), #Signal for the topology (B,D),A
+         A_signal = ifelse(P1 %in% parents2, P1_signal , P2_signal), #Signal for the topology (A,D),B
+         AB_signal= P12_signal, #Signal for the topology (A,B),D
+         h_index = (A_signal-AB_signal)/(A_signal+B_signal-(2*AB_signal)) # produces values outside [0,1]
+         ) %>%
+  mutate(Gamma = ifelse((Gamma<0.0) | (Gamma>1.0),NA,Gamma)) %>%
+  mutate(h_index = ifelse((h_index<0.0) | (h_index>1.0),NA,h_index)) 
+
+
+
+ggplot(mutica, aes(x = as.numeric(pos), y = Gamma, color)) +
+  stat_summary(fun.data = "mean_cl_normal", #confidence interval
+               geom = "errorbar", 
+               width = 0.2, 
+               color = "royalblue") +
+  
+  stat_summary(fun = "mean",  #mean dots
+               geom = "point", 
+               size = 2, 
+               color = "black") +
+  
+  # Add the horizontal dashed line at 0.5
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "red") +
+  
+  # Set Y-axis limits to represent probability
+  scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, 0.2)) +
+  scale_x_continuous(limits = c(0, 60), breaks = seq(0, 60, 10)) +
+  theme_bw() +
+  labs(
+    x = "Genomic Position (Window Index)", 
+    y = expression(gamma),
+    title = "Inheritance Probability across Chromosome 3"
+  ) 
+
+```
+
+To recreate the figure in 3A (top left panel) we want entries with Ae. mutica and T. Boeoticum 
+
+```r
+#filter entries with the focal species.
+A_B_species<- c("Ae_mutica","T_boeoticum")
+mutica_boeoticum <- mutica %>% 
+  filter((P1 %in% A_B_species) & (P2 %in% A_B_species) )
+  
+##Make the order of species match Fig3A
+target_order <- c(
+  "Ae_bicornis", "Ae_longissima", "Ae_sharonensis", "Ae_searsii", 
+  "Ae_tauschii", "Ae_caudata", "Ae_umbellulata", "Ae_comosa", "Ae_uniaristata"
+)
+mutica_boeoticum <- mutica_boeoticum %>%
+  mutate(Hybrid = factor(Hybrid, levels = target_order))
+
+
+
+ggplot(mutica_boeoticum, aes(x = Hybrid, y = Gamma, fill = Hybrid)) +
+  geom_violin(
+    trim = TRUE,
+    scale = "width",
+    color = NA
+  ) +
+  geom_boxplot(
+    width = 0.12,
+    outlier.shape = NA,
+    alpha = 0.85
+  ) +
+  scale_fill_manual(values = hybrid_colors, drop = FALSE) +
+  scale_x_discrete(drop = FALSE) +
+  geom_hline(
+    yintercept = 0.5,
+    linetype = "dotted",
+    color = "black"
+  ) +
+  labs(
+    x = "D focal species",
+    y = expression(gamma)
+  ) +
+  theme_bw() +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1),
+    panel.grid.major.x = element_blank(),
+    legend.position = "none"
+  )
+```
+
+It is worth noting that in figure 3A the authors only use entries with of p-value less than $$10^-6$$. We can first filter our results before plotting:
+
+```r
+significant_mutica_boeoticum <- mutica_boeoticum %>%
+	filter(Pvalue<1e-6)
+
+########################
+##Plot as we did above##
+########################
+
+```
+
+Note that this may not make a very complete figure as we are only using the HyDe results from Chromosome 3 instead of the whole genome.
+
+To make other panels, we need only select other focal species before filtering and plotting our data.
+For example, to plot the top right panel, we would use specify the focal species:
+
+```r
+A_B_species<- c("Ae_speltoides","T_boeoticum")
+```
+
 # Hybrid detection with MSCQuartets
 
 To compare the hybrid detection results from HyDe, we will run MSCQuartets in R.
@@ -25,39 +181,8 @@ quartetTablePrint(pTable3[1:6,])
 write.csv(pTable3, "11-mscquartets-ptable.csv")
 ```
 
-# Reproducing Figure 3A and 3B
+To produce something similar to Figure 3A (top left panel), 
 
-In `results`, we have the HyDe output files per position in chromosome 3. We want to extract the triplets were _Ae mutica, Ae speltoides, T boeoticum, T urartu_ are parents and the hybrid belongs to D clade (_Ae bicornis, Ae longissima, Ae sharonensis, Ae searsii, Ae tauschii, Ae caudata, Ae umbellilata, Ae comosa, Ae uniaristata_). 
-
-We note something wrong in the HyDe output files.
-
-In `results/HyDe/10Mb-concatenation-ch3`:
-```r
-i = 1
-dt = read.table(paste0("Size_10_Mb_Chrom_3_Pos_",i,"-out.txt"), header=TRUE)
-```
-
-```r
-> head(dt)
-           P1        Hybrid            P2   Zscore Pvalue Gamma      AAAA AAAB
-1 Ae_bicornis    Ae_caudata     Ae_comosa 13.41641      0   NaN 204375852    0
-2 Ae_bicornis     Ae_comosa    Ae_caudata 13.41641      0   NaN 204375852    0
-3  Ae_caudata   Ae_bicornis     Ae_comosa 13.41641      0   NaN 204375852    0
-4 Ae_bicornis    Ae_caudata Ae_longissima 16.43168      0   NaN 306563778    0
-5 Ae_bicornis Ae_longissima    Ae_caudata 16.43168      0   NaN 306563778    0
-6  Ae_caudata   Ae_bicornis Ae_longissima 16.43168      0   NaN 306563778    0
-  AABA AABB AABC ABAA ABAB ABAC ABBA BAAA ABBC CABC BACA BCAA ABCD
-1    0    0    0    0    0    0    0    0    0    0    0    0    0
-2    0    0    0    0    0    0    0    0    0    0    0    0    0
-3    0    0    0    0    0    0    0    0    0    0    0    0    0
-4    0    0    0    0    0    0    0    0    0    0    0    0    0
-5    0    0    0    0    0    0    0    0    0    0    0    0    0
-6    0    0    0    0    0    0    0    0    0    0    0    0    0
-```
-
-All gammas as NaN and the column AAAA has all the counts. We see the same pattern in the other positions in chromosome 3 and even the output of HyDe with the full concatenation. Therefore, we cannot reproduce Figure 3 A,B as in the paper.
-
-We will then try to summarize MSCQuartets instead.
 
 ```r
 df = read.csv("11-mscquartets-ptable.csv", header=TRUE)

@@ -76,7 +76,7 @@ window_path = "../data/Wheat_Relative_History_Data_Glemin_et_al/Concatenation10M
 all_windows = os.listdir(window_path)
 
 for window in all_windows :
-	with open(window, "r") as f_in:
+	with open(window_path+window, "r") as f_in:
 		alignment = AlignIO.read(f_in, "fasta")
 
 	phylip_file = window_phylip_path+window.removesuffix(".fasta")+".phylip
